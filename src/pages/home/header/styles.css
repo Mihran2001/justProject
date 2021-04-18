@@ -1,0 +1,14 @@
+.carusel-wrapper {
+  padding-top: 25%;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.carusel-wrapper .carousel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
