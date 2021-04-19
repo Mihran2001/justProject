@@ -9,7 +9,7 @@ import image3 from "../images/6.jpg";
 export default function Footer() {
   return (
     <div className="footer-carousel">
-      {/* <Carousel>
+      <Carousel>
         <Carousel.Item interval={2000}>
           <img className="d-block w-100" src={image1} alt="First slide" />
           <Carousel.Caption>
@@ -33,7 +33,7 @@ export default function Footer() {
             </p>
           </Carousel.Caption>
         </Carousel.Item>
-      </Carousel> */}
+      </Carousel>
     </div>
   );
 }

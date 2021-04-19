@@ -6,37 +6,44 @@ import image1 from "../images/1.jpg";
 import image2 from "../images/2.jpg";
 import image3 from "../images/3.jpg";
 
-{
-  /* <div className="login">
-  <Button variant="light">Login</Button>
-</div> */
-}
-
 export default function Header() {
   return (
-    <div className="carusel-wrapper">
+    <div className="carousel-wrapper">
       <Carousel fade={true} pause={false}>
-        <Carousel.Item interval={3000}>
+        <Carousel.Item interval={30000000}>
           <img className="d-block w-100" src={image1} alt="First slide" />
+          <div className="fixed-build-resume">
+            <Button variant="secondary">Secondary</Button>
+          </div>
+          <div className="login">
+            <Button variant="light">Login</Button>
+          </div>
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <h3>Your resume is available at a click</h3>
+            <p>Easy Tool to get started with</p>
+            <div class="bulid-resume">
+              <Button variant="warning">BUILD A RESUME</Button>
+            </div>
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item interval={3000}>
+        <Carousel.Item interval={30000000}>
           <img className="d-block w-100" src={image2} alt="Third slide" />
           <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3>Your resume is available at a click</h3>
+            <p>Easy Tool to get started with</p>
+            <div class="bulid-resume">
+              <Button variant="warning">BUILD A RESUME</Button>
+            </div>
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item interval={3000}>
+        <Carousel.Item interval={30000000}>
           <img className="d-block w-100" src={image3} alt="Third slide" />
           <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
+            <h3>Your resume is available at a click</h3>
+            <p>Easy Tool to get started with</p>
+            <div class="bulid-resume">
+              <Button variant="warning">BUILD A RESUME</Button>
+            </div>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

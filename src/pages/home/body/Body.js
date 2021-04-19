@@ -5,7 +5,9 @@ export default function Body() {
   return (
     <div className="main-body">
       <div className="top-section">
-        <div className="first-icon"> </div>
+        <div className="first-icon">
+          <i className="icon-home"> </i>
+        </div>
         <div className="second-icon"> </div>
         <div className="third-icon"> </div>
       </div>

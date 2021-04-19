@@ -1,14 +1,48 @@
-.carusel-wrapper {
-  padding-top: 25%;
+.carousel-wrapper {
+  height: 530px;
   overflow: hidden;
   width: 100%;
   position: relative;
 }
 
-.carusel-wrapper .carousel {
+.carousel-wrapper .carousel {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+}
+.carousel-wrapper .carousel .carousel-item img {
+  height: 530px;
+  object-fit: cover;
+}
+.carousel-wrapper .carousel .carousel-item .carousel-caption {
+  bottom: 80px;
+  transform: translateY(-140px);
+}
+
+.carousel-wrapper .carousel .carousel-item .carousel-caption > h3 {
+  color: white;
+}
+
+.carousel-wrapper .carousel .carousel-indicators > li {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.carousel-wrapper .carousel > ol {
+  transform: translateY(-20px);
+}
+
+.login {
+  position: fixed;
+  top: 5px;
+  right: 120px;
+}
+
+.fixed-build-resume {
+  position: fixed;
+  top: 5px;
+  right: 10px;
 }
