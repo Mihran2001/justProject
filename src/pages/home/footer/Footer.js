@@ -2,30 +2,37 @@ import React from "react";
 import { Carousel } from "react-bootstrap";
 import "./styles.css";
 
-import image1 from "../images/4.jpg";
-import image2 from "../images/5.jpg";
-import image3 from "../images/6.jpg";
+// import image1 from "../images/4.jpg";
+// import image2 from "../images/5.jpg";
+// import image3 from "../images/6.jpg";
+
+import Source from "./Source";
 
 export default function Footer() {
   return (
     <div className="footer-carousel">
       <Carousel>
-        <Carousel.Item interval={2000}>
-          <img className="d-block w-100" src={image1} alt="First slide" />
+        <Carousel.Item interval={200000}>
+          {/* <img className="d-block w-100" src={image1} alt="First slide" /> */}
+          <Source className="d-block w-100" />
           <Carousel.Caption>
             <h3>First slide label</h3>
             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item interval={2000}>
-          <img className="d-block w-100" src={image2} alt="Second slide" />
+        <Carousel.Item interval={200000}>
+          {/* <img className="d-block w-100" src={image2} alt="Second slide" /> */}
+          <Source className="d-block w-100" />
+
           <Carousel.Caption>
             <h3>Second slide label</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img className="d-block w-100" src={image3} alt="Third slide" />
+          {/* <img className="d-block w-100" src={image3} alt="Third slide" /> */}
+          <Source className="d-block w-100" />
+
           <Carousel.Caption>
             <h3>Third slide label</h3>
             <p>

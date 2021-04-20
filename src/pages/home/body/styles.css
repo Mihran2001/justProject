@@ -12,21 +12,39 @@
 }
 
 .first-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 300px;
   width: 300px;
-  /* background-color: rgb(255, 0, 34); */
+}
+
+.first-icon .icon-cv {
+  font-size: 75px;
 }
 
 .second-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 300px;
   width: 300px;
-  background-color: yellow;
+}
+
+.second-icon .icon-edit {
+  font-size: 75px;
 }
 
 .third-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 300px;
   width: 300px;
-  background-color: rgb(76, 0, 255);
+}
+
+.third-icon .copy-icon {
+  font-size: 75px;
 }
 
 .bottom-section {
@@ -37,19 +55,46 @@
 }
 
 .first-step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 200px;
   width: 200px;
-  background-color: rgb(111, 0, 255);
+}
+
+.first-step .first-circle {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: rgb(30, 255, 0);
 }
 
 .second-step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 200px;
   width: 200px;
-  background-color: saddlebrown;
+}
+
+.second-step .second-circle {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: rgb(30, 255, 0);
 }
 
 .third-step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 200px;
   width: 200px;
-  background-color: rgb(19, 121, 139);
+}
+
+.third-step .third-circle {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: rgb(30, 255, 0);
 }
