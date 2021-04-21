@@ -5,28 +5,42 @@ export default function Body() {
   return (
     <div className="main-body">
       <div className="top-section">
-        <div className="first-icon">
-          <i className="icon-profile icon-cv"> </i>
-          <div className="first-icon-content">
-            {/* <h3> View sample cover letters </h3>
-            <p> All Job Industries, Multiple formats </p> */}
+        <div className="icons-and-content">
+          <div className="icons">
+            <i className="icon-profile icon-cv"> </i>
+          </div>
+          <div className="icon-content">
+            <h4> View sample cover letters </h4>
+            <p> All Job Industries, Multiple formats </p>
           </div>
         </div>
-        <div className="second-icon">
-          <i className="icon-document-edit icon-edit"> </i>
+        <div className="icons-and-content">
+          <div className="icons">
+            <i className="icon-document-edit icon-edit"> </i>
+          </div>
+          <div className="icon-content">
+            <h4> Manage and edit your resume </h4>
+            <p> Verify of Formats </p>
+          </div>
         </div>
-        <div className="third-icon">
-          <i className="icon-copy copy-icon"> </i>
+        <div className="icons-and-content">
+          <div className="icons">
+            <i className="icon-copy copy-icon"> </i>
+          </div>
+          <div className="icon-content">
+            <h4> Multiple versions of your resume </h4>
+            <p> Post your resume online free </p>
+          </div>
         </div>
       </div>
       <div className="bottom-section">
-        <div className="first-step">
+        <div className="steps">
           <div className="first-circle"></div>
         </div>
-        <div className="second-step">
+        <div className="steps">
           <div className="second-circle"></div>
         </div>
-        <div className="third-step">
+        <div className="steps">
           <div className="third-circle"></div>
         </div>
       </div>
