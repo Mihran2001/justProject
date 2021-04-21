@@ -35,13 +35,31 @@ export default function Body() {
       </div>
       <div className="bottom-section">
         <div className="steps">
-          <div className="first-circle"></div>
+          <div className="circle">
+            <h4> 1 </h4>
+          </div>
+          <div className="coose-template">
+            <p> Choose Template </p>
+          </div>
         </div>
         <div className="steps">
-          <div className="second-circle"></div>
+          <div className="easy-steps">
+            <h4> Easy 3 Steps </h4>
+          </div>
+          <div className="circle">
+            <h4> 2 </h4>
+          </div>
+          <div className="coose-template">
+            <p> Build Resume </p>
+          </div>
         </div>
         <div className="steps">
-          <div className="third-circle"></div>
+          <div className="circle">
+            <h4> 3 </h4>
+          </div>
+          <div className="coose-template">
+            <p> Review </p>
+          </div>
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ export default function Header() {
         <Carousel.Item interval={30000000}>
           <img className="d-block w-100" src={image1} alt="First slide" />
           <div className="fixed-build-resume">
-            <Button variant="secondary">Secondary</Button>
+            <Button variant="secondary">Build a resume</Button>
           </div>
           <div className="login">
             <Button variant="light">Login</Button>
@@ -28,6 +28,12 @@ export default function Header() {
         </Carousel.Item>
         <Carousel.Item interval={30000000}>
           <img className="d-block w-100" src={image2} alt="Third slide" />
+          <div className="fixed-build-resume">
+            <Button variant="secondary">Build a resume</Button>
+          </div>
+          <div className="login">
+            <Button variant="light">Login</Button>
+          </div>
           <Carousel.Caption>
             <h3>Your resume is available at a click</h3>
             <p>Easy Tool to get started with</p>
@@ -38,6 +44,12 @@ export default function Header() {
         </Carousel.Item>
         <Carousel.Item interval={30000000}>
           <img className="d-block w-100" src={image3} alt="Third slide" />
+          <div className="fixed-build-resume">
+            <Button variant="secondary">Build a resume</Button>
+          </div>
+          <div className="login">
+            <Button variant="light">Login</Button>
+          </div>
           <Carousel.Caption>
             <h3>Your resume is available at a click</h3>
             <p>Easy Tool to get started with</p>
