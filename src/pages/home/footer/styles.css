@@ -21,3 +21,17 @@
 .footer-carousel .carousel-item {
   height: 100%;
 }
+
+.footer-carousel .carousel-content > p {
+  color: black;
+}
+
+.footer-carousel .carousel-caption {
+  position: absolute;
+  top: 30px;
+}
+
+.footer-carousel .footer-icon {
+  font-size: 90px;
+  color: cornflowerblue;
+}
