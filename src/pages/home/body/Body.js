@@ -33,7 +33,11 @@ export default function Body() {
           </div>
         </div>
       </div>
-      <div className="bottom-section">
+
+      <div className="easy-steps">
+        <h4> Easy 3 Steps </h4>
+      </div>
+      <div className="section-steps">
         <div className="steps">
           <div className="circle">
             <h4> 1 </h4>
@@ -43,9 +47,6 @@ export default function Body() {
           </div>
         </div>
         <div className="steps">
-          <div className="easy-steps">
-            <h4> Easy 3 Steps </h4>
-          </div>
           <div className="circle">
             <h4> 2 </h4>
           </div>

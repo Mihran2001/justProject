@@ -4,3 +4,20 @@
   width: 100%;
   position: relative;
 }
+
+.footer-carousel .carousel-inner {
+  height: 430px;
+  width: 100%;
+}
+
+.footer-carousel .carousel-control-prev {
+  display: none;
+}
+
+.footer-carousel .carousel-control-next {
+  display: none;
+}
+
+.footer-carousel .carousel-item {
+  height: 100%;
+}
