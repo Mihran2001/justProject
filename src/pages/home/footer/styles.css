@@ -1,12 +1,10 @@
 .footer-carousel {
-  height: 460px;
-  overflow: hidden;
   width: 100%;
   position: relative;
 }
 
 .footer-carousel .carousel-inner {
-  height: 430px;
+  padding-bottom: 80px;
   width: 100%;
 }
 
@@ -22,16 +20,58 @@
   height: 100%;
 }
 
+.footer-carousel .carousel-content {
+  text-align: center;
+}
+
 .footer-carousel .carousel-content > p {
   color: black;
 }
 
-.footer-carousel .carousel-caption {
+/* .footer-carousel .carousel-caption {
   position: absolute;
   top: 30px;
-}
+} */
 
 .footer-carousel .footer-icon {
-  font-size: 90px;
+  font-size: 70px;
   color: cornflowerblue;
+  margin: 50px 0px;
+  display: inline-block;
+}
+
+.footer-carousel .carousel .carousel-indicators {
+  background-color: rgb(230, 230, 230);
+}
+
+.footer-carousel .carousel .carousel-indicators > li {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+}
+
+.footer-carousel .footer-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-top: 1px solid rgba(180, 182, 176, 0.657);
+  background-color: rgb(230, 230, 230);
+}
+
+.footer-carousel .footer-info .links > a {
+  margin-right: 20px;
+  color: rgb(90, 90, 90);
+}
+
+.footer-carousel .carousel-content {
+  margin-right: 70px;
+}
+
+.footer-carousel .carousel-content > h3 {
+  margin-top: 30px;
+}
+
+.links {
+  margin: 10px 0px;
 }
