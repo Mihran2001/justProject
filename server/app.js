@@ -13,13 +13,10 @@ const app = express();
 const port = process.env.port || 9000;
 app.listen(port);
 
-mongoose.connect(
-  "mongodb+srv://mihran:1mihran12315@cluster0.ulrw3.mongodb.net/cvUsers?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect("mongodb://localhost:27017/cvProject", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const db = mongoose.connection;
 
@@ -32,6 +29,7 @@ db.once("open", () => {
 });
 
 // view engine setup
+dotenv.config();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
@@ -41,7 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", usersRouter);
+app.use("/api", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

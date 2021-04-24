@@ -26,7 +26,7 @@ const login = async (req, res) => {
     const user = await authService.login(req.body);
     console.log(user);
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "2h",
     });
 
     res.cookie("jwt", token, {
@@ -41,7 +41,7 @@ const login = async (req, res) => {
       userId: user._id,
     });
   } catch (err) {
-    res.json(err.message);
+    res.json({ message: "Login or password is not true" });
   }
 };
 
