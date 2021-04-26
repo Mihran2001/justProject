@@ -4,6 +4,7 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
+import {loginAxios} from '../../api/api'
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,8 +15,15 @@ const Wrapper = styled.div`
 `;
 
 const Register = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+  const history = useHistory();
+  const onFinish = async (values) => {
+    // console.log("Received values of form: ", values);
+    const data = await loginAxios(values)
+    console.log(data)
+    if (data.message === 'logined successfuly') {
+      localStorage.setItem("access_token", data.token)
+      history.push('/profile')
+    }
   };
 
   return (

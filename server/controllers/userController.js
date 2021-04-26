@@ -8,11 +8,11 @@ const register = async (req, res) => {
     const isRegistered = await authService.register(req);
     console.log(isRegistered);
     if (!isRegistered) {
-      res.json({
+      return res.json({
         message: "This email already exsist",
       });
     } else {
-      res.json({
+      return res.json({
         message: "User registered successfuly",
       });
     }
@@ -26,19 +26,20 @@ const login = async (req, res) => {
     const user = await authService.login(req.body);
     console.log(user);
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "2h",
+      expiresIn: "10h",
     });
 
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      sameSite: true,
-      maxAge: 60 * 60 * 1000,
-    });
+    // res.cookie("jwt", token, {
+    //   httpOnly: true,
+    //   sameSite: true,
+    //   maxAge: 60 * 60 * 1000,
+    // });
 
     res.status(200).json({
       message: "logined successfuly",
       username: user.username,
       userId: user._id,
+      token
     });
   } catch (err) {
     res.json({ message: "Login or password is not true" });

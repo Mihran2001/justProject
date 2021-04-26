@@ -1,9 +1,12 @@
 import "antd/dist/antd.css";
+import axios from 'axios'
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
+import { useEffect } from "react";
+import {registerAxios} from '../../api/api'
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,8 +17,14 @@ const Wrapper = styled.div`
 `;
 
 const Register = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+  const history = useHistory();
+  const onFinish = async (values) => {
+    // console.log("Received values of form: ", values);
+    const data = await registerAxios(values);
+    if (data.message === 'User registered successfuly') {
+      history.push("/auth/login")
+    }
+    console.log((data))
   };
 
   return (
