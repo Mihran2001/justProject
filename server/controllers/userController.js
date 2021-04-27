@@ -39,7 +39,7 @@ const login = async (req, res) => {
       message: "logined successfuly",
       username: user.username,
       userId: user._id,
-      token
+      token,
     });
   } catch (err) {
     res.json({ message: "Login or password is not true" });

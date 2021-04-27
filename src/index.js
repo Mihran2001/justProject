@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AuthProvider from "./providers/AuthProvider";
+import { useAuthProviderState } from "./providers/AuthProvider";
+import { Route, Redirect } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>

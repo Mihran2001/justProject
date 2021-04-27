@@ -1,5 +1,6 @@
 import styled, { ThemeProvider } from "styled-components";
 import GlobalStyle from "./global";
+import { useAuthProviderState } from "./providers/AuthProvider";
 import Router from "./Router";
 
 const Main = styled.main`

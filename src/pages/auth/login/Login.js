@@ -4,7 +4,8 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
-import {loginAxios} from '../../api/api'
+import { loginAxios } from "../../api/api";
+import { useAuthDispatch } from "../../../providers/AuthProvider";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,72 +17,74 @@ const Wrapper = styled.div`
 
 const Register = () => {
   const history = useHistory();
+  const { login } = useAuthDispatch();
   const onFinish = async (values) => {
     // console.log("Received values of form: ", values);
-    const data = await loginAxios(values)
-    console.log(data)
-    if (data.message === 'logined successfuly') {
-      localStorage.setItem("access_token", data.token)
-      history.push('/profile')
+    if (await login(values)) {
+      history.replace("/profile");
     }
   };
 
   return (
     <Wrapper>
-    <Form
-      name="normal_login"
-      className="login-form"
-      initialValues={{
-        remember: true,
-      }}
-      onFinish={onFinish}
-    >
-      <Form.Item
-        name="email"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Email!",
-          },
-        ]}
+      <Form
+        name="normal_login"
+        className="login-form"
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={onFinish}
       >
-        <Input
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Email"
-        />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Password!",
-          },
-        ]}
-      >
-        <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Item>
-      <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
+        <Form.Item
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Email!",
+            },
+          ]}
+        >
+          <Input
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="Email"
+          />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Password!",
+            },
+          ]}
+        >
+          <Input
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Item>
+        <Form.Item>
+          <Form.Item name="remember" valuePropName="checked" noStyle>
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
+
+          <a className="login-form-forgot" href="">
+            Forgot password
+          </a>
         </Form.Item>
 
-        <a className="login-form-forgot" href="">
-          Forgot password
-        </a>
-      </Form.Item>
-
-      <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
-          Log in
-        </Button>
-        Or <NavLink to="/auth/register">register now!</NavLink>
-      </Form.Item>
-    </Form>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+          >
+            Log in
+          </Button>
+          Or <NavLink to="/auth/register">register now!</NavLink>
+        </Form.Item>
+      </Form>
     </Wrapper>
   );
 };

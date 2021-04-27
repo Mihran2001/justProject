@@ -1,11 +1,11 @@
 const User = require("../models/userSchema");
 const jwt = require("jsonwebtoken");
 
-const isJwtValide = async (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     if (!token) {
-      return res.json("unauthorized");
+      return res.json({ message: "unauthorized" });
     }
     const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
     if (verifiedToken) {
@@ -19,4 +19,4 @@ const isJwtValide = async (req, res, next) => {
   }
 };
 
-module.exports = isJwtValide;
+module.exports = authMiddleware;
