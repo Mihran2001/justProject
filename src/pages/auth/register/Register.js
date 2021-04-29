@@ -21,7 +21,7 @@ const Register = () => {
   const onFinish = async (values) => {
     // console.log("Received values of form: ", values);
     const data = await registerAxios(values);
-    if (data.message === 'User registered successfuly') {
+    if (data.status === 'User registered successfuly') {
       history.push("/auth/login")
     }
     console.log((data))

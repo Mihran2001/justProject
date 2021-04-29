@@ -35,35 +35,41 @@ function handleChange(value) {
 export default function Sidebar() {
   return (
     <div className="sidebar">
-      <div className="sidebarHeader">
-        <div className="profileIcon">
+      <div className="sidebar-header">
+        <div className="profile-icon">
           <UserOutlined style={{ fontSize: "36px", color: "#08c" }} />{" "}
         </div>
-        <div className="userName">
+        <div className="user-name">
           <h6> Narek Sahakyan </h6>
           <a href=""> Free plan </a>
         </div>
       </div>
-      <div className="upgradeButton">
+      <div className="upgrade-button">
         <Button style={{ paddingRight: "50px", paddingLeft: "50px" }} block>
           Upgrade
         </Button>
       </div>
-      <p className="freePlan">
+      <p className="free-plan">
         With the free plan you can only enjoy watching free matches
       </p>
 
-      <div className="sidebarBody">
+      <div className="sidebar-body">
         <div className="personalProfile">
-          <UserOutlined style={{ fontSize: "20px", color: "black" }} />{" "}
+          <UserOutlined style={{ fontSize: "20px" }} className="icon-color" />{" "}
           <p> Personal Info </p>
         </div>
         <div className="subscriptions">
-          <CreditCardOutlined style={{ fontSize: "20px", color: "black" }} />
+          <CreditCardOutlined
+            style={{ fontSize: "20px" }}
+            className="icon-color"
+          />
           <p> Subscriptions </p>
         </div>
         <div className="changePassword">
-          <ShoppingOutlined style={{ fontSize: "20px", color: "black" }} />
+          <ShoppingOutlined
+            style={{ fontSize: "20px" }}
+            className="icon-color"
+          />
           <p> Change Password </p>
         </div>
       </div>
