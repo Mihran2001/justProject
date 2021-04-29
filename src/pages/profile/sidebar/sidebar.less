@@ -1,0 +1,54 @@
+.sidebar {
+  display: flex;
+  height: 700px;
+  width: 300px;
+  border-radius: 20px 0px 0px 20px;
+  background-color: white;
+  flex-direction: column;
+  padding: 25px 25px;
+  border-right: 1px solid rgb(148, 140, 140);
+
+  .sidebarHeader {
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    padding-right: 25px;
+
+    .userName {
+      margin-top: 25px;
+    }
+
+    .profileIcon {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 30px;
+    }
+  }
+  .freePlan {
+    margin-top: 10px;
+    font-size: small;
+    display: inline-block;
+  }
+
+  .sidebarBody {
+    height: 200px;
+    margin-top: 40px;
+    p {
+      display: inline-block;
+      font-size: small;
+      padding-left: 20px;
+    }
+    div {
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+    div:hover {
+      background-color: rgb(203, 197, 197);
+      p {
+        color: rgb(124, 184, 5);
+      }
+    }
+  }
+}
