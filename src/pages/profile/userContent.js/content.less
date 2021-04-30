@@ -1,4 +1,6 @@
 .user-content {
+  display: flex;
+  flex-direction: column;
   flex: 2;
 
   .content-header {
@@ -9,9 +11,23 @@
   }
 
   .change-contacts {
-    margin: 40px;
+    margin: 0 40px 0 40px;
     .add-photo {
       size: 30px;
     }
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  .profile-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: black;
+    margin-bottom: 0px;
+    height: 70px;
+    width: 100%;
   }
 }
