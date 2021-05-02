@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   width: 100vw;
 `;
 
-const Register = () => {
+const Login = () => {
   const history = useHistory();
   const { login } = useAuthDispatch();
   const onFinish = async (values) => {
@@ -89,4 +89,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

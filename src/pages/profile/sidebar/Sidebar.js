@@ -28,11 +28,13 @@ import { Select } from "antd";
 
 const { Option } = Select;
 
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
-
 export default function Sidebar() {
+  function handleChange(value) {
+    console.log(`selected ${value}`);
+    // if (value === 'DarkMode') {
+
+    // }
+  }
   return (
     <div className="sidebar">
       <div className="sidebar-header">

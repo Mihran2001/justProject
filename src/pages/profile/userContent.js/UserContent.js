@@ -93,8 +93,8 @@ export default function UserContent() {
               Your account will be activ untill Desember 26, 2021
             </p>
           </div>
-          <Button size="large" type="primary">
-            Primary Button
+          <Button size="large" type="primary" className="footer-button">
+            Save
           </Button>
         </div>
       </div>
