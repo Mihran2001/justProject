@@ -6,7 +6,7 @@ import Sidebar from "./sidebar/Sidebar";
 import UserContent from "./userContent.js/UserContent";
 import { ModeContext } from "../../providers/ModeProvider";
 import styled, { ThemeProvider } from "styled-components";
-import { ligthTheme, darkTheme, GlobalStyles } from "./Themes.js";
+import { lightTheme, darkTheme, GlobalStyles } from "./sidebar/Themes.js";
 
 export const ThemeModes = {
   DARK_MODE: "dark",
@@ -17,7 +17,7 @@ export default function Profile() {
   const { mode } = useContext(ModeContext);
   return (
     <ThemeProvider
-      theme={mode === ThemeModes.LIGHT_MODE ? ligthTheme : darkTheme}
+      theme={mode === ThemeModes.LIGHT_MODE ? lightTheme : darkTheme}
     >
       <GlobalStyles />
       <div className="main">
