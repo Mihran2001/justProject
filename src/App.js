@@ -2,6 +2,7 @@ import styled, { ThemeProvider } from "styled-components";
 import GlobalStyle from "./global";
 import { useAuthProviderState } from "./providers/AuthProvider";
 import Router from "./Router";
+import ModeProvider from "./providers/ModeProvider";
 
 const Main = styled.main`
   min-height: 100%;
@@ -12,7 +13,9 @@ function App() {
     <ThemeProvider theme={{ fontFamily: "Helvetica Neue" }}>
       <GlobalStyle />
       <Main>
-        <Router />
+        <ModeProvider>
+          <Router />
+        </ModeProvider>
       </Main>
     </ThemeProvider>
   );

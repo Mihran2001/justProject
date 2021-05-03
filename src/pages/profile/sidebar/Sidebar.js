@@ -1,20 +1,4 @@
-// import React, { useState } from "react";
-// import styled, { ThemeProvider } from "styled-components";
-
-// const StyledApp = styled.div`
-//   color: ${(props) => props.theme.fontColor};
-// `;
-
-// export default function Profile() {
-//   const [theme, setTheme] = useState("ligth");
-
-//   const themToggler = () => {
-//     theme === "ligth" ? setTheme("dark") : setTheme("ligth");
-//   };
-//   return <button onClick={() => themToggler()}>Profile</button>;
-// }
-
-import React from "react";
+import React, { useState, useContext, createContext } from "react";
 import "./sidebar.less";
 import "antd/dist/antd.less";
 import {
@@ -25,15 +9,16 @@ import {
 import { Button } from "antd";
 import "antd/dist/antd.less";
 import { Select } from "antd";
+import { ModeContext } from "../../../providers/ModeProvider";
+import { ThemeModes } from "../Profile";
 
 const { Option } = Select;
 
 export default function Sidebar() {
+  const { mode, setMode } = useContext(ModeContext);
   function handleChange(value) {
     console.log(`selected ${value}`);
-    // if (value === 'DarkMode') {
-
-    // }
+    setMode(value);
   }
   return (
     <div className="sidebar">
@@ -82,8 +67,8 @@ export default function Sidebar() {
         onChange={handleChange}
       >
         <Option value="System">System</Option>
-        <Option value="DarkMode">Dark Mode</Option>
-        <Option value="LigthMode">Ligth Mode</Option>
+        <Option value={ThemeModes.DARK_MODE}>Dark Mode</Option>
+        <Option value={ThemeModes.LIGHT_MODE}>Ligth Mode</Option>
       </Select>
     </div>
   );
