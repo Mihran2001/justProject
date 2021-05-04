@@ -62,11 +62,11 @@ export default function Sidebar() {
       </div>
       <p style={{ fontSize: "small" }}> Appearance </p>
       <Select
-        defaultValue="System"
+        defaultValue={ThemeModes.LIGHT_MODE}
         style={{ width: 120 }}
         onChange={handleChange}
       >
-        <Option value="System">System</Option>
+        {/* <Option value="System">System</Option> */}
         <Option value={ThemeModes.DARK_MODE}>Dark Mode</Option>
         <Option value={ThemeModes.LIGHT_MODE}>Ligth Mode</Option>
       </Select>

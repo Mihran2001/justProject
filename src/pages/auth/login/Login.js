@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { Redirect } from "react-router-dom";
 import { loginAxios } from "../../api/api";
 import { useAuthDispatch } from "../../../providers/AuthProvider";
+import LoginUsingGmail from "./LoginUsingGmail";
+import "./style.less";
 
 const Wrapper = styled.div`
   display: flex;
@@ -84,6 +86,7 @@ const Login = () => {
           </Button>
           Or <NavLink to="/auth/register">register now!</NavLink>
         </Form.Item>
+        <LoginUsingGmail />
       </Form>
     </Wrapper>
   );

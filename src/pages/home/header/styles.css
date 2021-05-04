@@ -36,12 +36,14 @@
 }
 
 .login {
+  z-index: 99;
   position: fixed;
   top: 5px;
   right: 150px;
 }
 
 .fixed-build-resume {
+  z-index: 99;
   position: fixed;
   top: 5px;
   right: 10px;

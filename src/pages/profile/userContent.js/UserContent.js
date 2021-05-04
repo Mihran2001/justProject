@@ -21,6 +21,7 @@ const tailLayout = {
 
 const onFinish = (values) => {
   console.log("Success:", values);
+  console.log(1523);
 };
 
 const onFinishFailed = (errorInfo) => {
@@ -49,6 +50,7 @@ export default function UserContent() {
           <div className="name-email">
             <h6 style={{ marginLeft: "20px" }}> Name </h6>
             <Form.Item
+              name="username"
               rules={[
                 {
                   required: true,
@@ -62,8 +64,8 @@ export default function UserContent() {
 
             <h6 style={{ marginLeft: "20px" }}> Email </h6>
             <Row>
-              {/* <Col span={18}> */}
               <Form.Item
+                name="email"
                 rules={[
                   {
                     required: true,
@@ -74,15 +76,12 @@ export default function UserContent() {
               >
                 <Input.Password />
               </Form.Item>
-              {/* </Col> */}
 
-              {/* <Col span={6}> */}
               <Form.Item {...tailLayout} style={{ marginLeft: "-135px" }}>
                 <Button type="primary" htmlType="submit">
                   Change
                 </Button>
               </Form.Item>
-              {/* </Col> */}
             </Row>
           </div>
         </Form>
