@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import "./style.less";
 import "antd/dist/antd.less";
 
-import Sidebar from "./sidebar/Sidebar";
-import UserContent from "./userContent.js/UserContent";
+import Sidebar from "./Sidebar/index";
+import UserContent from "./UserContent.js/index";
 import { ModeContext } from "../../providers/ModeProvider";
 import styled, { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme, GlobalStyles } from "./sidebar/Themes.js";
+import { lightTheme, darkTheme, GlobalStyles } from "./Sidebar/Themes.js";
 
 export const ThemeModes = {
   DARK_MODE: "dark",

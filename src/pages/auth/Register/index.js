@@ -1,13 +1,12 @@
 import "antd/dist/antd.css";
+import axios from "axios";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
-import { loginAxios } from "../../api/api";
-import { useAuthDispatch } from "../../../providers/AuthProvider";
-import LoginUsingGmail from "./LoginUsingGmail";
-import "./style.less";
+import { useEffect } from "react";
+import { registerAxios } from "../../Api";
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,14 +16,15 @@ const Wrapper = styled.div`
   width: 100vw;
 `;
 
-const Login = () => {
+const Register = () => {
   const history = useHistory();
-  const { login } = useAuthDispatch();
   const onFinish = async (values) => {
     // console.log("Received values of form: ", values);
-    if (await login(values)) {
-      history.replace("/profile");
+    const data = await registerAxios(values);
+    if (data.message == "User registered successfuly") {
+      history.push("/auth/login");
     }
+    console.log(data);
   };
 
   return (
@@ -49,6 +49,20 @@ const Login = () => {
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Email"
+          />
+        </Form.Item>
+        <Form.Item
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Username!",
+            },
+          ]}
+        >
+          <Input
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="Username"
           />
         </Form.Item>
         <Form.Item
@@ -82,14 +96,13 @@ const Login = () => {
             htmlType="submit"
             className="login-form-button"
           >
-            Log in
+            Register
           </Button>
-          Or <NavLink to="/auth/register">register now!</NavLink>
+          Or <NavLink to="/auth/login">Login</NavLink>
         </Form.Item>
-        <LoginUsingGmail />
       </Form>
     </Wrapper>
   );
 };
 
-export default Login;
+export default Register;

@@ -18,7 +18,7 @@ export async function loginAxios(values) {
   return data;
 }
 
-export async function tokenAxios() {
+export function tokenAxios() {
   const token = localStorage.getItem("access_token");
   axios.interceptors.request.use(function (config) {
     config.headers.Authorization = token;

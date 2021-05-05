@@ -1,12 +1,17 @@
 import "antd/dist/antd.css";
-import axios from "axios";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
+import { loginAxios } from "../../Api";
+import {
+  useAuthDispatch,
+  useAuthProviderState,
+} from "../../../providers/AuthProvider";
+import LoginUsingGmail from "./LoginUsingGmail";
+import "./style.less";
 import { useEffect } from "react";
-import { registerAxios } from "../../api/api";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,15 +21,25 @@ const Wrapper = styled.div`
   width: 100vw;
 `;
 
-const Register = () => {
+const Login = () => {
   const history = useHistory();
+  const { login } = useAuthDispatch();
+  const { isAuth } = useAuthProviderState();
+  const location = useLocation();
+  console.log("location is", location);
+
+  useEffect(() => {
+    if (isAuth) {
+      const { from } = location.state || { from: { pathname: "/profile" } };
+      history.replace(from.pathname);
+    }
+  }, [isAuth]);
+
   const onFinish = async (values) => {
     // console.log("Received values of form: ", values);
-    const data = await registerAxios(values);
-    if (data.message == "User registered successfuly") {
-      history.push("/auth/login");
+    if (await login(values)) {
+      history.replace("/profile");
     }
-    console.log(data);
   };
 
   return (
@@ -49,20 +64,6 @@ const Register = () => {
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Email"
-          />
-        </Form.Item>
-        <Form.Item
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: "Please input your Username!",
-            },
-          ]}
-        >
-          <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Username"
           />
         </Form.Item>
         <Form.Item
@@ -96,13 +97,14 @@ const Register = () => {
             htmlType="submit"
             className="login-form-button"
           >
-            Register
+            Log in
           </Button>
-          Or <NavLink to="/auth/login">Login</NavLink>
+          Or <NavLink to="/auth/register">register now!</NavLink>
         </Form.Item>
+        <LoginUsingGmail />
       </Form>
     </Wrapper>
   );
 };
 
-export default Register;
+export default Login;

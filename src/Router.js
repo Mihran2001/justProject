@@ -1,26 +1,19 @@
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import Home from "./pages/home/Home";
-import Profile from "./pages/profile/Profile";
-import Register from "./pages/auth/register/Register";
-import Login from "./pages/auth/login/Login";
+import Home from "./pages/Home/index";
+import Profile from "./pages/Profile/index";
+import Register from "./pages/auth/Register/index";
+import Login from "./pages/auth/Login/index";
 import PrivateRoute from "./PrivateRout";
 import { useAuthProviderState } from "./providers/AuthProvider";
+import CvCreator from "./pages/CvCreator/index";
 
 function NotFoundPage() {
   return <h3>Not correct url</h3>;
 }
 
 export default function Router() {
-  const { isAuth } = useAuthProviderState();
   return (
     <BrowserRouter>
-      {isAuth() && (
-        <Redirect
-          to={{
-            pathname: "/profile",
-          }}
-        />
-      )}
       <Switch>
         <Route path="/auth/register">
           <Register />
@@ -31,6 +24,9 @@ export default function Router() {
         <Route path="/" exact>
           <Home />
         </Route>
+        <PrivateRoute path="/profile/cv">
+          <CvCreator />
+        </PrivateRoute>
         <PrivateRoute path="/profile" exact>
           <Profile />
         </PrivateRoute>

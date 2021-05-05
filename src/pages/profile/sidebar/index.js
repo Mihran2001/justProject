@@ -10,7 +10,7 @@ import { Button } from "antd";
 import "antd/dist/antd.less";
 import { Select } from "antd";
 import { ModeContext } from "../../../providers/ModeProvider";
-import { ThemeModes } from "../Profile";
+import { ThemeModes } from "..";
 
 const { Option } = Select;
 

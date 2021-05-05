@@ -1,7 +1,7 @@
 import React from "react";
 import "antd/dist/antd.less";
 import { UserAddOutlined } from "@ant-design/icons";
-import "./content.less";
+import "./style.less";
 import { Form, Input, Button, Checkbox, Row, Col } from "antd";
 
 const layout = {

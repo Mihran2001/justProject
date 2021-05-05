@@ -1,20 +1,14 @@
 import React, { useState, createContext, useEffect } from "react";
 import { useContext } from "react";
-import isTokenExist from "../pages/api/isTockenExist";
-import { loginAxios, tokenAxios } from "../pages/api/api";
+import isTokenExist from "../pages/Api/isTockenExist";
+import { loginAxios, tokenAxios } from "../pages/Api";
 export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
   const [state, setState] = useState({
-    isAuthenticated: false,
+    isAuthenticated: isTokenExist(),
     // userDate: {},
   });
-
-  useEffect(() => {
-    if (isTokenExist()) {
-      setState((prev) => ({ ...prev, isAuthenticated: true }));
-    }
-  }, [setState]);
 
   return (
     <AuthContext.Provider value={{ state, setState }}>
@@ -30,10 +24,8 @@ export const useAuthProviderState = () => {
     throw Error("useAuthProviderState must be used in AuthContext");
   }
 
-  function isAuth() {
-    return state.isAuthenticated;
-  }
-  return { isAuth };
+  console.log("in login page", state.isAuthenticated);
+  return { isAuth: state.isAuthenticated };
 };
 
 export const useAuthDispatch = () => {
