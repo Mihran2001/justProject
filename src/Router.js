@@ -6,6 +6,7 @@ import Login from "./pages/auth/Login/index";
 import PrivateRoute from "./PrivateRout";
 import { useAuthProviderState } from "./providers/AuthProvider";
 import CvCreator from "./pages/CvCreator/index";
+import GuestRoute from "./GuestRoute";
 
 function NotFoundPage() {
   return <h3>Not correct url</h3>;
@@ -15,12 +16,12 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/auth/register">
+        <GuestRoute path="/auth/register">
           <Register />
-        </Route>
-        <Route path="/auth/login">
+        </GuestRoute>
+        <GuestRoute path="/auth/login">
           <Login />
-        </Route>
+        </GuestRoute>
         <Route path="/" exact>
           <Home />
         </Route>

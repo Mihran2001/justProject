@@ -35,7 +35,10 @@ export const useAuthDispatch = () => {
     const data = await loginAxios(values);
     console.log(data);
     if (data.message === "logined successfuly") {
-      localStorage.setItem("access_token", data.token);
+      if (values.remember) localStorage.setItem("access_token", data.token);
+      else {
+        sessionStorage.setItem("access_token", data.token);
+      }
       tokenAxios();
       setState({ isAuthenticated: true });
       return true;
