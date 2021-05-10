@@ -8,6 +8,8 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 import Item from "antd/lib/list/Item";
+import { Space, Typography, Divider } from "antd";
+import uuid from "react-uuid";
 
 export default function Sidebar() {
   const [inputs, setInput] = useState([]);
@@ -17,13 +19,11 @@ export default function Sidebar() {
     return setInput([
       ...inputs,
       {
-        id: inputs.length,
+        id: uuid(),
         value: "",
       },
     ]);
   };
-
-  // console.log(inputs);
 
   const handleInputChange = (id, value) => {
     return setInput(() => {
@@ -43,8 +43,10 @@ export default function Sidebar() {
     return setLanguages([
       ...languages,
       {
-        id: languages.length,
+        id: uuid(),
         value: "",
+        lvlLanguage: "Native or Bilingual Proficiency",
+        bool: false,
       },
     ]);
   };
@@ -63,7 +65,36 @@ export default function Sidebar() {
     });
   };
 
-  console.log(languages);
+  const handleBool = (id) => {
+    return setLanguages((prev) => {
+      return prev.map((language) => {
+        if (language.id === id) {
+          return {
+            ...language,
+            bool: true,
+          };
+        }
+        return language;
+      });
+    });
+  };
+
+  const handleLvl = (lvlLanguage, id) => {
+    return setLanguages((prev) => {
+      return prev.map((language) => {
+        if (language.id === id) {
+          return {
+            ...language,
+            lvlLanguage,
+            bool: false,
+          };
+        }
+        return language;
+      });
+    });
+  };
+
+  console.log({ languages, inputs });
 
   return (
     <div className="cv-sidebar">
@@ -73,7 +104,7 @@ export default function Sidebar() {
         name="myfile"
         style={{ display: "none" }}
       />
-      <label for="myfile">
+      <label htmlFor="myfile">
         <Avatar icon={<UserOutlined />} />
       </label>
       <div className="mail-phone-number">
@@ -117,13 +148,73 @@ export default function Sidebar() {
       <div className="language-inputes">
         {languages.map((language) => {
           return (
-            <input
-              onChange={(e) =>
-                handleLanguageChange(language.id, e.target.value)
-              }
-              key={language.id}
-              value={language.value}
-            />
+            <div key={language.id}>
+              <input
+                onChange={(e) =>
+                  handleLanguageChange(language.id, e.target.value)
+                }
+                value={language.value}
+              />
+              {language.bool ? (
+                <Space
+                  split={<Divider type="vertical" />}
+                  style={{
+                    backgroundColor: "slategrey",
+                    marginTop: "10px",
+                    padding: "10px",
+                    borderRadius: "5px",
+                  }}
+                >
+                  <Typography.Link
+                    style={{ color: "white" }}
+                    onClick={() =>
+                      handleLvl("Elementary Proficiency", language.id)
+                    }
+                  >
+                    1/5
+                  </Typography.Link>
+                  <Typography.Link
+                    style={{ color: "white" }}
+                    onClick={() =>
+                      handleLvl("Limited Working Proficiency", language.id)
+                    }
+                  >
+                    2/5
+                  </Typography.Link>
+                  <Typography.Link
+                    style={{ color: "white" }}
+                    onClick={() =>
+                      handleLvl("Professional Working Proficiency", language.id)
+                    }
+                  >
+                    3/5
+                  </Typography.Link>
+                  <Typography.Link
+                    style={{ color: "white" }}
+                    onClick={() =>
+                      handleLvl("Full Professional Proficiency", language.id)
+                    }
+                  >
+                    4/5
+                  </Typography.Link>
+                  <Typography.Link
+                    style={{ color: "white" }}
+                    onClick={() =>
+                      handleLvl("Native or Bilingual Proficiency", language.id)
+                    }
+                  >
+                    5/5
+                  </Typography.Link>
+                </Space>
+              ) : (
+                <p
+                  style={{ fontSize: "13px" }}
+                  onClick={() => handleBool(language.id)}
+                >
+                  {language.lvlLanguage}
+                </p>
+              )}
+            </div>
           );
         })}
       </div>
