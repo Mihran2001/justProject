@@ -109,11 +109,14 @@ export default function Sidebar() {
       </label>
       <div className="mail-phone-number">
         <MailOutlined className="mail-icon" />
-        <Input placeholder="Input your email" style={{ marginTop: "10px" }} />
+        <Input
+          placeholder="Input your email"
+          style={{ marginTop: "10px", border: "none" }}
+        />
         <MobileOutlined className="phone-icon" />
         <Input
           placeholder="Input your Phone Number"
-          style={{ marginTop: "10px" }}
+          style={{ marginTop: "10px", border: "none" }}
         />
       </div>
       <div className="skills">
@@ -131,6 +134,17 @@ export default function Sidebar() {
               onChange={(e) => handleInputChange(input.id, e.target.value)}
               value={input.value}
               key={input.id}
+              style={{
+                border: "none",
+                outline: "none",
+                backgroundColor: "#313c4e",
+                marginBottom: "5px",
+                borderRadius: "6px",
+                color: "#fff",
+              }}
+              // onkeypress={
+              //   (this.style.width = (this.value.length + 1) * 8 + "px")
+              // }
             />
           );
         })}
@@ -154,6 +168,8 @@ export default function Sidebar() {
                   handleLanguageChange(language.id, e.target.value)
                 }
                 value={language.value}
+                style={{ border: "none", outline: "none", fontSize: "20px" }}
+                placeholder={"Input Language"}
               />
               {language.bool ? (
                 <Space
@@ -166,6 +182,7 @@ export default function Sidebar() {
                   }}
                 >
                   <Typography.Link
+                    className="lvl-numbers"
                     style={{ color: "white" }}
                     onClick={() =>
                       handleLvl("Elementary Proficiency", language.id)
@@ -174,6 +191,7 @@ export default function Sidebar() {
                     1/5
                   </Typography.Link>
                   <Typography.Link
+                    className="lvl-numbers"
                     style={{ color: "white" }}
                     onClick={() =>
                       handleLvl("Limited Working Proficiency", language.id)
@@ -182,6 +200,7 @@ export default function Sidebar() {
                     2/5
                   </Typography.Link>
                   <Typography.Link
+                    className="lvl-numbers"
                     style={{ color: "white" }}
                     onClick={() =>
                       handleLvl("Professional Working Proficiency", language.id)
@@ -190,6 +209,7 @@ export default function Sidebar() {
                     3/5
                   </Typography.Link>
                   <Typography.Link
+                    className="lvl-numbers"
                     style={{ color: "white" }}
                     onClick={() =>
                       handleLvl("Full Professional Proficiency", language.id)
@@ -198,6 +218,7 @@ export default function Sidebar() {
                     4/5
                   </Typography.Link>
                   <Typography.Link
+                    className="lvl-numbers"
                     style={{ color: "white" }}
                     onClick={() =>
                       handleLvl("Native or Bilingual Proficiency", language.id)
@@ -209,6 +230,7 @@ export default function Sidebar() {
               ) : (
                 <p
                   style={{ fontSize: "13px" }}
+                  className="language-lvl"
                   onClick={() => handleBool(language.id)}
                 >
                   {language.lvlLanguage}
