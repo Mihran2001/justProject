@@ -19,7 +19,6 @@ export default function InputForm({
         onChange={(e) =>
           setUserContent({ ...userContent, [type]: e.target.value })
         }
-        key={uuid()}
       />
     </div>
   );

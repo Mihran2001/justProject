@@ -19,9 +19,10 @@ export default function Main() {
     surName: "Surname",
     profession: "",
     education: [],
+    // job: [],
   });
 
-  // console.log(userContent);
+  console.log(userContent);
   // console.log(startDate);
 
   const showModal = () => {
@@ -63,15 +64,14 @@ export default function Main() {
     });
   };
 
-  console.log(userContent);
+  console.log(userContent.name);
 
   return (
     <div className="main-part">
       <div className="header">
         <div className="about-user" onClick={showModal}>
           <h1>
-            {" "}
-            {userContent.name} {userContent.surName}{" "}
+            {userContent.name} {userContent.surName}
           </h1>
         </div>
 
@@ -133,7 +133,7 @@ export default function Main() {
                 placeholder="Education place"
                 style={{ fontSize: "25px" }}
               />
-              {/* <div className="education-date"> */}
+
               <Input
                 key={item.id}
                 onChange={(e) =>
@@ -141,7 +141,6 @@ export default function Main() {
                 }
                 placeholder="Data"
               />
-              {/* </div> */}
 
               <Input
                 key={item.id}
@@ -161,6 +160,14 @@ export default function Main() {
             </div>
           );
         })}
+      </div>
+      <div className="certificates">
+        <h3> Certificates/Job experience </h3>
+        <PlusCircleOutlined
+          className="plus-icon"
+          style={{ fontSize: "25px" }}
+          onClick={addInput}
+        />
       </div>
     </div>
   );
