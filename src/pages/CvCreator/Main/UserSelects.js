@@ -1,35 +1,17 @@
-// import React from "react";
-// import { Select } from "antd";
-
-// export default function UserSelects() {
-//   const { Option } = Select;
-
-//   function handleChange(value) {
-//     console.log(`selected ${value}`);
-//   }
-
-//   return (
-//     <>
-//       <label> some </label>
-//       <Select
-//         defaultValue="lucy"
-//         style={{ width: 120 }}
-//         onChange={handleChange}
-//       >
-//         <Option value="lucy">Lucy</Option>
-//       </Select>
-//     </>
-//   );
-// }
-
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import "./style.less";
 
-export default function UserSelects() {
-  const [startDate, setStartDate] = useState(new Date());
+export default function UserSelects({ startDate, setStartDate }) {
   return (
-    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+    <div className="datepicker">
+      <label style={{ paddingTop: "15px" }}> User date </label>
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+      />
+    </div>
   );
 }
