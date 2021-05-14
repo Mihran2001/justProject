@@ -19,25 +19,10 @@ export default function Main() {
     surName: "Surname",
     profession: "",
     education: [],
-    // job: [],
+    job: [],
   });
 
-  console.log(userContent);
-  // console.log(startDate);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  const addInput = () => {
+  const addEducation = () => {
     setUserContent((prev) => ({
       ...prev,
       education: [
@@ -47,7 +32,19 @@ export default function Main() {
     }));
   };
 
-  const handleInputChange = (id, value, field) => {
+  const addJob = () => {
+    setUserContent((prev) => ({
+      ...prev,
+      job: [
+        ...prev.job,
+        { companyName: "", date: "", description: "", id: uuid() },
+      ],
+    }));
+  };
+
+  console.log(userContent);
+
+  const handleEducationInputChange = (id, value, field) => {
     setUserContent((prev) => {
       return {
         ...prev,
@@ -64,12 +61,29 @@ export default function Main() {
     });
   };
 
+  const handleJobInputChange = (id, value, key) => {
+    setUserContent((prev) => {
+      return {
+        ...prev,
+        job: prev.job.map((item) => {
+          if (item.id === id) {
+            return {
+              ...item,
+              [key]: value,
+            };
+          }
+          return item;
+        }),
+      };
+    });
+  };
+
   console.log(userContent.name);
 
   return (
     <div className="main-part">
       <div className="header">
-        <div className="about-user" onClick={showModal}>
+        <div className="about-user" onClick={() => setIsModalVisible(true)}>
           <h1>
             {userContent.name} {userContent.surName}
           </h1>
@@ -89,8 +103,8 @@ export default function Main() {
         bodyStyle={{ backgroundColor: "#425061" }}
         title="User Contacts"
         visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        onOk={() => setIsModalVisible(false)}
+        onCancel={() => setIsModalVisible(false)}
         width={700}
       >
         <div className="allInputs">
@@ -118,42 +132,42 @@ export default function Main() {
         <PlusCircleOutlined
           className="plus-icon"
           style={{ fontSize: "25px" }}
-          onClick={addInput}
+          onClick={addEducation}
         />
       </div>
       <div className="all-education-divs">
         {userContent.education.map((item) => {
           return (
-            <div className="education-div">
+            <div className="education-div" key={item.id}>
               <Input
-                key={item.id}
                 onChange={(e) =>
-                  handleInputChange(item.id, e.target.value, "educationPlace")
+                  handleEducationInputChange(
+                    item.id,
+                    e.target.value,
+                    "educationPlace"
+                  )
                 }
                 placeholder="Education place"
                 style={{ fontSize: "25px" }}
               />
 
               <Input
-                key={item.id}
                 onChange={(e) =>
-                  handleInputChange(item.id, e.target.value, "date")
+                  handleEducationInputChange(item.id, e.target.value, "date")
                 }
                 placeholder="Data"
               />
 
               <Input
-                key={item.id}
                 onChange={(e) =>
-                  handleInputChange(item.id, e.target.value, "gpm")
+                  handleEducationInputChange(item.id, e.target.value, "gpa")
                 }
-                placeholder="GPM"
+                placeholder="GPA"
               />
 
               <Input
-                key={item.id}
                 onChange={(e) =>
-                  handleInputChange(item.id, e.target.value, "courses")
+                  handleEducationInputChange(item.id, e.target.value, "courses")
                 }
                 placeholder="Courses"
               />
@@ -166,8 +180,37 @@ export default function Main() {
         <PlusCircleOutlined
           className="plus-icon"
           style={{ fontSize: "25px" }}
-          onClick={addInput}
+          onClick={addJob}
         />
+      </div>
+
+      <div className="job-divs">
+        {userContent.job.map((item) => {
+          return (
+            <div className="job-inputes" key={item.id}>
+              <Input
+                onChange={(e) =>
+                  handleJobInputChange(item.id, e.target.value, "companyName")
+                }
+                placeholder="Company Name"
+              />
+
+              <Input
+                onChange={(e) =>
+                  handleJobInputChange(item.id, e.target.value, "date")
+                }
+                placeholder="Date"
+              />
+
+              <Input
+                onChange={(e) =>
+                  handleJobInputChange(item.id, e.target.value, "description")
+                }
+                placeholder="Description"
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
