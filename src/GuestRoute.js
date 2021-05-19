@@ -9,7 +9,7 @@ export default function GuestRoute({ children }) {
   return (
     <Route
       render={() => {
-        return !isAuthenticated ? children : <Redirect to="/profile" />;
+        return !isAuthenticated ? children : <Redirect to="/profile/cv" />;
       }}
     />
   );

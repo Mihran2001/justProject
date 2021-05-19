@@ -30,7 +30,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuth) {
-      const { from } = location.state || { from: { pathname: "/profile" } };
+      const { from } = location.state || { from: { pathname: "/profile/cv" } };
       history.replace(from.pathname);
     }
   }, [isAuth]);
@@ -38,7 +38,7 @@ const Login = () => {
   const onFinish = async (values) => {
     // console.log("Received values of form: ", values);
     if (await login(values)) {
-      history.replace("/profile");
+      history.replace("/profile/cv");
     }
   };
 

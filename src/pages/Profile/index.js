@@ -7,6 +7,7 @@ import UserContent from "./UserContent.js/index";
 import { ModeContext } from "../../providers/ModeProvider";
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "./Sidebar/Themes.js";
+import Header from "./Header/index";
 
 export const ThemeModes = {
   DARK_MODE: "dark",
@@ -22,6 +23,7 @@ export default function Profile() {
       <GlobalStyles />
       <div className="main">
         <div className="userPorfile">
+          <Header />
           <Sidebar />
           <UserContent />
         </div>
