@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import "./style.less";
 import { Modal, Button, Input } from "antd";
 import InputForm from "./InputForms";
@@ -10,82 +10,142 @@ import {
 import UserSelects from "./UserSelects";
 import uuid from "react-uuid";
 
-export default function Main() {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
+const reducer = (state, action) => {
+  if (action.type === "AddEducation") {
+    return {
+      ...state,
+      education: [
+        ...state.education,
+        { id: uuid(), educationPlace: "", date: "", gpa: "", courses: "" },
+      ],
+    };
+  } else if (action.type === "AddJob") {
+    return {
+      ...state,
+      job: [
+        ...state.job,
+        { companyName: "", date: "", description: "", id: uuid() },
+      ],
+    };
+  } else if (action.type === "HandleEducationInputChange") {
+    {
+      return {
+        ...state,
+        education: state.education.map((item) => {
+          if (action.id === item.id) {
+            return {
+              ...item,
+              [action.field]: action.value,
+            };
+          }
+          return item;
+        }),
+      };
+    }
+  } else if (action.type === "HandleJobInputChange") {
+    return {
+      ...state,
+      job: state.job.map((item) => {
+        if (item.id === action.id) {
+          return {
+            ...item,
+            [action.field]: action.value,
+          };
+        }
+        return item;
+      }),
+    };
+  } else if (action.type === "AddProffesion") {
+    return {
+      ...state,
+      profession: action.value,
+    };
+  }
+};
 
-  const [userContent, setUserContent] = useState({
+export default function Main() {
+  const [state, dispatch] = useReducer(reducer, {
     name: "Name",
     surName: "Surname",
     profession: "",
     education: [],
     job: [],
   });
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
 
-  const addEducation = () => {
-    setUserContent((prev) => ({
-      ...prev,
-      education: [
-        ...prev.education,
-        { id: uuid(), educationPlace: "", date: "", gpa: "", courses: "" },
-      ],
-    }));
-  };
+  // const [userContent, setUserContent] = useState({
+  //   name: "Name",
+  //   surName: "Surname",
+  //   profession: "",
+  //   education: [],
+  //   job: [],
+  // });
 
-  const addJob = () => {
-    setUserContent((prev) => ({
-      ...prev,
-      job: [
-        ...prev.job,
-        { companyName: "", date: "", description: "", id: uuid() },
-      ],
-    }));
-  };
+  // const addEducation = () => {
+  //   setUserContent((prev) => ({
+  //     ...prev,
+  //     education: [
+  //       ...prev.education,
+  //       { id: uuid(), educationPlace: "", date: "", gpa: "", courses: "" },
+  //     ],
+  //   }));
+  // };
 
-  console.log(userContent);
+  // const addJob = () => {
+  //   setUserContent((prev) => ({
+  //     ...prev,
+  //     job: [
+  //       ...prev.job,
+  //       { companyName: "", date: "", description: "", id: uuid() },
+  //     ],
+  //   }));
+  // };
 
-  const handleEducationInputChange = (id, value, field) => {
-    setUserContent((prev) => {
-      return {
-        ...prev,
-        education: prev.education.map((item) => {
-          if (id === item.id) {
-            return {
-              ...item,
-              [field]: value,
-            };
-          }
-          return item;
-        }),
-      };
-    });
-  };
+  // console.log(userContent);
 
-  const handleJobInputChange = (id, value, key) => {
-    setUserContent((prev) => {
-      return {
-        ...prev,
-        job: prev.job.map((item) => {
-          if (item.id === id) {
-            return {
-              ...item,
-              [key]: value,
-            };
-          }
-          return item;
-        }),
-      };
-    });
-  };
+  // const handleEducationInputChange = (id, value, field) => {
+  //   setUserContent((prev) => {
+  //     return {
+  //       ...prev,
+  //       education: prev.education.map((item) => {
+  //         if (id === item.id) {
+  //           return {
+  //             ...item,
+  //             [field]: value,
+  //           };
+  //         }
+  //         return item;
+  //       }),
+  //     };
+  //   });
+  // };
 
-  console.log(userContent.name);
+  // const handleJobInputChange = (id, value, key) => {
+  //   setUserContent((prev) => {
+  //     return {
+  //       ...prev,
+  //       job: prev.job.map((item) => {
+  //         if (item.id === id) {
+  //           return {
+  //             ...item,
+  //             [key]: value,
+  //           };
+  //         }
+  //         return item;
+  //       }),
+  //     };
+  //   });
+  // };
+
+  // console.log(userContent.name);
 
   return (
     <div className="main-part">
       <div className="header">
         <div className="about-user" onClick={() => setIsModalVisible(true)}>
           <h1>
-            {userContent.name} {userContent.surName}
+            {state.name} {state.surName}
           </h1>
         </div>
 
@@ -94,7 +154,11 @@ export default function Main() {
           style={{ width: "300px", marginLeft: "20px" }}
           className="profession-input"
           onChange={(e) =>
-            setUserContent({ ...userContent, profession: e.target.value })
+            // setUserContent({ ...userContent, profession: e.target.value })
+            dispatch({
+              type: "AddProffesion",
+              value: e.target.value,
+            })
           }
         />
       </div>
@@ -111,16 +175,17 @@ export default function Main() {
           <InputForm
             setPlaceholder={"Name"}
             icon={<UserOutlined style={{ fontSize: "20px" }} type={"name"} />}
-            setUserContent={setUserContent}
-            userContent={userContent}
-            type={"name"}
+            // setUserContent={setUserContent}
+            dispatch={dispatch}
+            userContent={state}
+            name={"name"}
           />
           <InputForm
             setPlaceholder={"Family Name"}
             icon={<TeamOutlined style={{ fontSize: "20px" }} />}
-            setUserContent={setUserContent}
-            userContent={userContent}
-            type={"surName"}
+            dispatch={dispatch}
+            userContent={state}
+            name={"surName"}
           />
         </div>
         <UserSelects startDate={startDate} setStartDate={setStartDate} />
@@ -132,20 +197,36 @@ export default function Main() {
         <PlusCircleOutlined
           className="plus-icon"
           style={{ fontSize: "25px" }}
-          onClick={addEducation}
+          // onClick={addEducation}
+          onClick={() =>
+            dispatch({
+              type: "AddEducation",
+            })
+          }
         />
       </div>
       <div className="all-education-divs">
-        {userContent.education.map((item) => {
+        {state.education.map((item) => {
           return (
             <div className="education-div" key={item.id}>
               <Input
+                // onChange={(e) =>
+                //   handleEducationInputChange(
+                //     item.id,
+                //     e.target.value,
+                //     "educationPlace"
+                //   )
+                // }
+
                 onChange={(e) =>
-                  handleEducationInputChange(
-                    item.id,
-                    e.target.value,
-                    "educationPlace"
-                  )
+                  dispatch({
+                    type: "HandleEducationInputChange",
+                    value: {
+                      id: item.id,
+                      value: e.target.value,
+                      field: "educationPlace",
+                    },
+                  })
                 }
                 placeholder="Education place"
                 style={{ fontSize: "25px" }}
@@ -153,21 +234,45 @@ export default function Main() {
 
               <Input
                 onChange={(e) =>
-                  handleEducationInputChange(item.id, e.target.value, "date")
+                  // handleEducationInputChange(item.id, e.target.value, "date")
+                  dispatch({
+                    type: "HandleEducationInputChange",
+                    value: {
+                      id: item.id,
+                      value: e.target.value,
+                      field: "date",
+                    },
+                  })
                 }
                 placeholder="Data"
               />
 
               <Input
                 onChange={(e) =>
-                  handleEducationInputChange(item.id, e.target.value, "gpa")
+                  // handleEducationInputChange(item.id, e.target.value, "gpa")
+                  dispatch({
+                    type: "HandleEducationInputChange",
+                    value: {
+                      id: item.id,
+                      value: e.target.value,
+                      field: "gpa",
+                    },
+                  })
                 }
                 placeholder="GPA"
               />
 
               <Input
                 onChange={(e) =>
-                  handleEducationInputChange(item.id, e.target.value, "courses")
+                  // handleEducationInputChange(item.id, e.target.value, "courses")
+                  dispatch({
+                    type: "HandleEducationInputChange",
+                    value: {
+                      id: item.id,
+                      value: e.target.value,
+                      field: "courses",
+                    },
+                  })
                 }
                 placeholder="Courses"
               />
@@ -180,31 +285,60 @@ export default function Main() {
         <PlusCircleOutlined
           className="plus-icon"
           style={{ fontSize: "25px" }}
-          onClick={addJob}
+          // onClick={addJob}
+          onClick={() =>
+            dispatch({
+              type: "AddJob",
+            })
+          }
         />
       </div>
 
       <div className="job-divs">
-        {userContent.job.map((item) => {
+        {state.job.map((item) => {
           return (
             <div className="job-inputes" key={item.id}>
               <Input
                 onChange={(e) =>
-                  handleJobInputChange(item.id, e.target.value, "companyName")
+                  // handleJobInputChange(item.id, e.target.value, "companyName")
+                  dispatch({
+                    type: "HandleJobInputChange",
+                    value: {
+                      id: item.id,
+                      value: e.target.value,
+                      field: "companyName",
+                    },
+                  })
                 }
                 placeholder="Company Name"
               />
 
               <Input
                 onChange={(e) =>
-                  handleJobInputChange(item.id, e.target.value, "date")
+                  // handleJobInputChange(item.id, e.target.value, "date")
+                  dispatch({
+                    type: "HandleJobInputChange",
+                    value: {
+                      id: item.id,
+                      value: e.target.value,
+                      field: "date",
+                    },
+                  })
                 }
                 placeholder="Date"
               />
 
               <Input
                 onChange={(e) =>
-                  handleJobInputChange(item.id, e.target.value, "description")
+                  // handleJobInputChange(item.id, e.target.value, "description")
+                  dispatch({
+                    type: "HandleJobInputChange",
+                    value: {
+                      id: item.id,
+                      value: e.target.value,
+                      field: "description",
+                    },
+                  })
                 }
                 placeholder="Description"
               />

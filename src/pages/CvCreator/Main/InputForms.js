@@ -7,8 +7,8 @@ export default function InputForm({
   setPlaceholder,
   icon,
   userContent,
-  setUserContent,
-  type,
+  dispatch,
+  name,
 }) {
   return (
     <div className="input-and-icon">
@@ -17,7 +17,11 @@ export default function InputForm({
         style={{ width: "300px", marginRight: "20px" }}
         placeholder={setPlaceholder}
         onChange={(e) =>
-          setUserContent({ ...userContent, [type]: e.target.value })
+          // dispatch({ ...userContent, [name]: e.target.value })
+          dispatch({
+            type: "SetUserContent",
+            [name]: e.target.value,
+          })
         }
       />
     </div>
