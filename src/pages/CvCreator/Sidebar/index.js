@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import "./style.less";
 import { Avatar, Input } from "antd";
 import {
@@ -11,90 +11,211 @@ import Item from "antd/lib/list/Item";
 import { Space, Typography, Divider } from "antd";
 import uuid from "react-uuid";
 
-export default function Sidebar() {
-  const [inputs, setInput] = useState([]);
-  const [languages, setLanguages] = useState([]);
+const inputTypes = {
+  SET_SKILL: "SET_SKILL",
+  HANDLE_INPUT_CHANGE: "HANDLE_INPUT_CHANGE",
+  ADD_LANGUAGE: "ADD_LANGUAGE",
+  HANDLE_LANGUAGE_CHANGE: "HANDLE_LANGUAGE_CHANGE",
+  HANDLE_BOOL: "HANDLE_BOOL",
+  HANDLE_LVL: "HANDLE_LVL",
+};
 
-  const addInput = () => {
-    return setInput([
-      ...inputs,
-      {
-        id: uuid(),
-        value: "",
-      },
-    ]);
-  };
-
-  const handleInputChange = (id, value) => {
-    return setInput(() => {
-      return inputs.map((input) => {
-        if (id === input.id) {
-          return {
-            ...input,
-            value,
-          };
-        }
-        return input;
-      });
+const reducer = (state, action) => {
+  if (action.type === inputTypes.SET_SKILL) {
+    return {
+      ...state,
+      skills: [
+        ...state.skills,
+        {
+          id: action.id,
+          value: action.value,
+        },
+      ],
+    };
+  } else if (action.type === inputTypes.HANDLE_INPUT_CHANGE) {
+    const handledSkills = state.skills.map((input) => {
+      if (action.id === input.id) {
+        return {
+          ...input,
+          value: action.value,
+        };
+      }
+      return input;
     });
-  };
 
-  const addLanguage = () => {
-    return setLanguages([
-      ...languages,
-      {
+    return { ...state, skills: handledSkills };
+  } else if (action.type === inputTypes.ADD_LANGUAGE) {
+    return {
+      ...state,
+      languages: {
+        ...state.languages,
         id: uuid(),
         value: "",
         lvlLanguage: "Native or Bilingual Proficiency",
         bool: false,
       },
-    ]);
+    };
+  } else if (action.type === inputTypes.HANDLE_LANGUAGE_CHANGE) {
+    const handledLanguage = state.languages.map((language) => {
+      if (language.id === action.id) {
+        return {
+          ...language,
+          value: action.value,
+        };
+      }
+      return language;
+    });
+    return {
+      ...state,
+      languages: handledLanguage,
+    };
+  } else if (action.type === inputTypes.HANDLE_BOOL) {
+    const languages = state.languages.map((language) => {
+      if (language.id === action.id) {
+        return {
+          ...language,
+          bool: true,
+        };
+      }
+      return language;
+    });
+    return {
+      ...state,
+      languages,
+    };
+  } else if (action.type === inputTypes.HANDLE_LVL) {
+    const obj = state.languages.map((language) => {
+      if (language.id === action.id) {
+        return {
+          ...language,
+          lvlLanguage: action.lvlLanguage,
+          bool: false,
+        };
+      }
+      return language;
+    });
+    return {
+      ...state,
+      languages: obj,
+    };
+  }
+};
+
+export default function Sidebar() {
+  const [state, dispatch] = useReducer(reducer, {
+    skills: [],
+    languages: [],
+  });
+  // const [skills, setSkills] = useState([]);
+  // const [languages, setLanguages] = useState([]);
+
+  const addSkill = () => {
+    // return setSkills([
+    //   ...skills,
+    //   {
+    //     id: uuid(),
+    //     value: "",
+    //   },
+    // ]);
+    dispatch({
+      type: inputTypes.SET_SKILL,
+      id: uuid(),
+      value: "",
+    });
+  };
+
+  const handleInputChange = (id, value) => {
+    // return setSkills(() => {
+    //   return skills.map((input) => {
+    //     if (id === input.id) {
+    //       return {
+    //         ...input,
+    //         value,
+    //       };
+    //     }
+    //     return input;
+    //   });
+    // });
+    dispatch({
+      type: inputTypes.HANDLE_INPUT_CHANGE,
+      id,
+      value,
+    });
+  };
+
+  const addLanguage = () => {
+    // return setLanguages([
+    //   ...languages,
+    //   {
+    //     id: uuid(),
+    //     value: "",
+    //     lvlLanguage: "Native or Bilingual Proficiency",
+    //     bool: false,
+    //   },
+    // ]);
+    dispatch({
+      type: inputTypes.ADD_LANGUAGE,
+    });
   };
 
   const handleLanguageChange = (id, value) => {
-    return setLanguages(() => {
-      return languages.map((language) => {
-        if (language.id === id) {
-          return {
-            ...language,
-            value,
-          };
-        }
-        return language;
-      });
+    // return setLanguages(() => {
+    //   return languages.map((language) => {
+    //     if (language.id === id) {
+    //       return {
+    //         ...language,
+    //         value,
+    //       };
+    //     }
+    //     return language;
+    //   });
+    // });
+    dispatch({
+      type: inputTypes.HANDLE_LANGUAGE_CHANGE,
+      id,
+      value,
     });
   };
 
   const handleBool = (id) => {
-    return setLanguages((prev) => {
-      return prev.map((language) => {
-        if (language.id === id) {
-          return {
-            ...language,
-            bool: true,
-          };
-        }
-        return language;
-      });
+    // return setLanguages((prev) => {
+    //   return prev.map((language) => {
+    //     if (language.id === id) {
+    //       return {
+    //         ...language,
+    //         bool: true,
+    //       };
+    //     }
+    //     return language;
+    //   });
+    // });
+    dispatch({
+      type: inputTypes.HANDLE_BOOL,
+      id,
     });
   };
 
   const handleLvl = (lvlLanguage, id) => {
-    return setLanguages((prev) => {
-      return prev.map((language) => {
-        if (language.id === id) {
-          return {
-            ...language,
-            lvlLanguage,
-            bool: false,
-          };
-        }
-        return language;
-      });
+    // return setLanguages((prev) => {
+    //   return prev.map((language) => {
+    //     if (language.id === id) {
+    //       return {
+    //         ...language,
+    //         lvlLanguage,
+    //         bool: false,
+    //       };
+    //     }
+    //     return language;
+    //   });
+    // });
+    dispatch({
+      type: inputTypes.HANDLE_LVL,
+      lvlLanguage,
+      id,
     });
   };
 
-  console.log({ languages, inputs });
+  // console.log({ languages, skills });
 
   return (
     <div className="cv-sidebar">
@@ -124,11 +245,11 @@ export default function Sidebar() {
         <PlusCircleOutlined
           className="plus-icon"
           style={{ fontSize: "25px" }}
-          onClick={addInput}
+          onClick={addSkill}
         />
       </div>
-      <div className="skill-inputs">
-        {inputs.map((input) => {
+      <div className="skill-skills">
+        {state.skills.map((input) => {
           return (
             <input
               onChange={(e) => handleInputChange(input.id, e.target.value)}
@@ -160,7 +281,7 @@ export default function Sidebar() {
       </div>
 
       <div className="language-inputes">
-        {languages.map((language) => {
+        {state.languages.map((language) => {
           return (
             <div key={language.id}>
               <input
