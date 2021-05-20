@@ -10,8 +10,22 @@ import {
 import UserSelects from "./UserSelects";
 import uuid from "react-uuid";
 
+const ActionTypes = {
+  ADD_JOB: "ADD_JOB",
+  ADD_EDUCATION: "ADD_EDUCATION",
+  Handle_Job_Input_Change: "Handle_Job_Input_Change",
+  ADD_PROFFESION: "ADD_PROFFESION",
+  SET_INPUT_VALUE: "SET_INPUT_VALUE",
+  SET_EDUCATION_INPUT_VALUES: "SET_EDUCATION_INPUT_VALUES",
+};
+
+const InputNames = {
+  NAME: "name",
+  SURNAME: "surName",
+};
+
 const reducer = (state, action) => {
-  if (action.type === "AddEducation") {
+  if (action.type === ActionTypes.ADD_EDUCATION) {
     return {
       ...state,
       education: [
@@ -19,7 +33,7 @@ const reducer = (state, action) => {
         { id: uuid(), educationPlace: "", date: "", gpa: "", courses: "" },
       ],
     };
-  } else if (action.type === "AddJob") {
+  } else if (action.type === ActionTypes.ADD_JOB) {
     return {
       ...state,
       job: [
@@ -27,7 +41,7 @@ const reducer = (state, action) => {
         { companyName: "", date: "", description: "", id: uuid() },
       ],
     };
-  } else if (action.type === "HandleEducationInputChange") {
+  } else if (action.type === ActionTypes.SET_EDUCATION_INPUT_VALUES) {
     {
       return {
         ...state,
@@ -35,30 +49,35 @@ const reducer = (state, action) => {
           if (action.id === item.id) {
             return {
               ...item,
-              [action.field]: action.value,
+              [action.name]: action.value,
             };
           }
           return item;
         }),
       };
     }
-  } else if (action.type === "HandleJobInputChange") {
+  } else if (action.type === ActionTypes.Handle_Job_Input_Change) {
     return {
       ...state,
       job: state.job.map((item) => {
         if (item.id === action.id) {
           return {
             ...item,
-            [action.field]: action.value,
+            [action.name]: action.value,
           };
         }
         return item;
       }),
     };
-  } else if (action.type === "AddProffesion") {
+  } else if (action.type === ActionTypes.ADD_PROFFESION) {
     return {
       ...state,
       profession: action.value,
+    };
+  } else if (action.type === ActionTypes.SET_INPUT_VALUE) {
+    return {
+      ...state,
+      [action.name]: action.value,
     };
   }
 };
@@ -74,78 +93,26 @@ export default function Main() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
 
-  // const [userContent, setUserContent] = useState({
-  //   name: "Name",
-  //   surName: "Surname",
-  //   profession: "",
-  //   education: [],
-  //   job: [],
-  // });
+  console.log(state);
 
-  // const addEducation = () => {
-  //   setUserContent((prev) => ({
-  //     ...prev,
-  //     education: [
-  //       ...prev.education,
-  //       { id: uuid(), educationPlace: "", date: "", gpa: "", courses: "" },
-  //     ],
-  //   }));
-  // };
+  const handleInputChange = (name, value) => {
+    dispatch({ type: ActionTypes.SET_INPUT_VALUE, name, value });
+  };
 
-  // const addJob = () => {
-  //   setUserContent((prev) => ({
-  //     ...prev,
-  //     job: [
-  //       ...prev.job,
-  //       { companyName: "", date: "", description: "", id: uuid() },
-  //     ],
-  //   }));
-  // };
+  const handleEducationInputChange = (propsObj) => {
+    dispatch({ type: ActionTypes.SET_EDUCATION_INPUT_VALUES, ...propsObj });
+  };
 
-  // console.log(userContent);
-
-  // const handleEducationInputChange = (id, value, field) => {
-  //   setUserContent((prev) => {
-  //     return {
-  //       ...prev,
-  //       education: prev.education.map((item) => {
-  //         if (id === item.id) {
-  //           return {
-  //             ...item,
-  //             [field]: value,
-  //           };
-  //         }
-  //         return item;
-  //       }),
-  //     };
-  //   });
-  // };
-
-  // const handleJobInputChange = (id, value, key) => {
-  //   setUserContent((prev) => {
-  //     return {
-  //       ...prev,
-  //       job: prev.job.map((item) => {
-  //         if (item.id === id) {
-  //           return {
-  //             ...item,
-  //             [key]: value,
-  //           };
-  //         }
-  //         return item;
-  //       }),
-  //     };
-  //   });
-  // };
-
-  // console.log(userContent.name);
+  const handleJobInputChange = (propsObj) => {
+    dispatch({ type: ActionTypes.Handle_Job_Input_Change, ...propsObj });
+  };
 
   return (
     <div className="main-part">
       <div className="header">
         <div className="about-user" onClick={() => setIsModalVisible(true)}>
           <h1>
-            {state.name} {state.surName}
+            {state[InputNames.NAME]} {state[InputNames.SURNAME]}
           </h1>
         </div>
 
@@ -154,16 +121,14 @@ export default function Main() {
           style={{ width: "300px", marginLeft: "20px" }}
           className="profession-input"
           onChange={(e) =>
-            // setUserContent({ ...userContent, profession: e.target.value })
             dispatch({
-              type: "AddProffesion",
+              type: ActionTypes.ADD_PROFFESION,
               value: e.target.value,
             })
           }
         />
       </div>
       <Modal
-        // className="modal"
         bodyStyle={{ backgroundColor: "#425061" }}
         title="User Contacts"
         visible={isModalVisible}
@@ -173,19 +138,18 @@ export default function Main() {
       >
         <div className="allInputs">
           <InputForm
-            setPlaceholder={"Name"}
+            placeholder={"Name"}
             icon={<UserOutlined style={{ fontSize: "20px" }} type={"name"} />}
-            // setUserContent={setUserContent}
-            dispatch={dispatch}
-            userContent={state}
-            name={"name"}
+            name={InputNames.NAME}
+            // value={state[InputNames.NAME]}
+            onChange={(value) => handleInputChange(InputNames.NAME, value)}
           />
           <InputForm
-            setPlaceholder={"Family Name"}
+            placeholder="Family Name"
             icon={<TeamOutlined style={{ fontSize: "20px" }} />}
-            dispatch={dispatch}
-            userContent={state}
-            name={"surName"}
+            name={InputNames.SURNAME}
+            // value={state[InputNames.SURNAME]}
+            onChange={(value) => handleInputChange(InputNames.SURNAME, value)}
           />
         </div>
         <UserSelects startDate={startDate} setStartDate={setStartDate} />
@@ -197,10 +161,9 @@ export default function Main() {
         <PlusCircleOutlined
           className="plus-icon"
           style={{ fontSize: "25px" }}
-          // onClick={addEducation}
           onClick={() =>
             dispatch({
-              type: "AddEducation",
+              type: ActionTypes.ADD_EDUCATION,
             })
           }
         />
@@ -210,22 +173,11 @@ export default function Main() {
           return (
             <div className="education-div" key={item.id}>
               <Input
-                // onChange={(e) =>
-                //   handleEducationInputChange(
-                //     item.id,
-                //     e.target.value,
-                //     "educationPlace"
-                //   )
-                // }
-
                 onChange={(e) =>
-                  dispatch({
-                    type: "HandleEducationInputChange",
-                    value: {
-                      id: item.id,
-                      value: e.target.value,
-                      field: "educationPlace",
-                    },
+                  handleEducationInputChange({
+                    id: item.id,
+                    value: e.target.value,
+                    name: "educationPlace",
                   })
                 }
                 placeholder="Education place"
@@ -234,29 +186,21 @@ export default function Main() {
 
               <Input
                 onChange={(e) =>
-                  // handleEducationInputChange(item.id, e.target.value, "date")
-                  dispatch({
-                    type: "HandleEducationInputChange",
-                    value: {
-                      id: item.id,
-                      value: e.target.value,
-                      field: "date",
-                    },
+                  handleEducationInputChange({
+                    id: item.id,
+                    value: e.target.value,
+                    name: "date",
                   })
                 }
-                placeholder="Data"
+                placeholder="Date"
               />
 
               <Input
                 onChange={(e) =>
-                  // handleEducationInputChange(item.id, e.target.value, "gpa")
-                  dispatch({
-                    type: "HandleEducationInputChange",
-                    value: {
-                      id: item.id,
-                      value: e.target.value,
-                      field: "gpa",
-                    },
+                  handleEducationInputChange({
+                    id: item.id,
+                    value: e.target.value,
+                    name: "gpa",
                   })
                 }
                 placeholder="GPA"
@@ -264,14 +208,10 @@ export default function Main() {
 
               <Input
                 onChange={(e) =>
-                  // handleEducationInputChange(item.id, e.target.value, "courses")
-                  dispatch({
-                    type: "HandleEducationInputChange",
-                    value: {
-                      id: item.id,
-                      value: e.target.value,
-                      field: "courses",
-                    },
+                  handleEducationInputChange({
+                    id: item.id,
+                    value: e.target.value,
+                    name: "courses",
                   })
                 }
                 placeholder="Courses"
@@ -285,10 +225,9 @@ export default function Main() {
         <PlusCircleOutlined
           className="plus-icon"
           style={{ fontSize: "25px" }}
-          // onClick={addJob}
           onClick={() =>
             dispatch({
-              type: "AddJob",
+              type: ActionTypes.ADD_JOB,
             })
           }
         />
@@ -300,14 +239,10 @@ export default function Main() {
             <div className="job-inputes" key={item.id}>
               <Input
                 onChange={(e) =>
-                  // handleJobInputChange(item.id, e.target.value, "companyName")
-                  dispatch({
-                    type: "HandleJobInputChange",
-                    value: {
-                      id: item.id,
-                      value: e.target.value,
-                      field: "companyName",
-                    },
+                  handleJobInputChange({
+                    id: item.id,
+                    value: e.target.value,
+                    name: "companyName",
                   })
                 }
                 placeholder="Company Name"
@@ -315,14 +250,10 @@ export default function Main() {
 
               <Input
                 onChange={(e) =>
-                  // handleJobInputChange(item.id, e.target.value, "date")
-                  dispatch({
-                    type: "HandleJobInputChange",
-                    value: {
-                      id: item.id,
-                      value: e.target.value,
-                      field: "date",
-                    },
+                  handleJobInputChange({
+                    id: item.id,
+                    value: e.target.value,
+                    name: "date",
                   })
                 }
                 placeholder="Date"
@@ -330,14 +261,10 @@ export default function Main() {
 
               <Input
                 onChange={(e) =>
-                  // handleJobInputChange(item.id, e.target.value, "description")
-                  dispatch({
-                    type: "HandleJobInputChange",
-                    value: {
-                      id: item.id,
-                      value: e.target.value,
-                      field: "description",
-                    },
+                  handleJobInputChange({
+                    id: item.id,
+                    value: e.target.value,
+                    name: "description",
                   })
                 }
                 placeholder="Description"

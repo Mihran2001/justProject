@@ -4,25 +4,23 @@ import { Modal, Button, Input } from "antd";
 import uuid from "react-uuid";
 
 export default function InputForm({
-  setPlaceholder,
+  placeholder,
   icon,
-  userContent,
-  dispatch,
   name,
+  onChange,
+  value,
+  style = {},
+  inputStyle = {},
 }) {
   return (
-    <div className="input-and-icon">
+    <div className="input-and-icon" style={style}>
       {icon}
       <Input
-        style={{ width: "300px", marginRight: "20px" }}
-        placeholder={setPlaceholder}
-        onChange={(e) =>
-          // dispatch({ ...userContent, [name]: e.target.value })
-          dispatch({
-            type: "SetUserContent",
-            [name]: e.target.value,
-          })
-        }
+        style={{ width: "300px", marginRight: "20px", ...inputStyle }}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        // value={value}
+        name={name}
       />
     </div>
   );
