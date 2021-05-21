@@ -47,13 +47,15 @@ const reducer = (state, action) => {
   } else if (action.type === inputTypes.ADD_LANGUAGE) {
     return {
       ...state,
-      languages: {
+      languages: [
         ...state.languages,
-        id: uuid(),
-        value: "",
-        lvlLanguage: "Native or Bilingual Proficiency",
-        bool: false,
-      },
+        {
+          id: uuid(),
+          value: "",
+          lvlLanguage: "Native or Bilingual Proficiency",
+          bool: false,
+        },
+      ],
     };
   } else if (action.type === inputTypes.HANDLE_LANGUAGE_CHANGE) {
     const handledLanguage = state.languages.map((language) => {
@@ -106,17 +108,10 @@ export default function Sidebar() {
     skills: [],
     languages: [],
   });
-  // const [skills, setSkills] = useState([]);
-  // const [languages, setLanguages] = useState([]);
+
+  console.log(state);
 
   const addSkill = () => {
-    // return setSkills([
-    //   ...skills,
-    //   {
-    //     id: uuid(),
-    //     value: "",
-    //   },
-    // ]);
     dispatch({
       type: inputTypes.SET_SKILL,
       id: uuid(),
@@ -125,17 +120,6 @@ export default function Sidebar() {
   };
 
   const handleInputChange = (id, value) => {
-    // return setSkills(() => {
-    //   return skills.map((input) => {
-    //     if (id === input.id) {
-    //       return {
-    //         ...input,
-    //         value,
-    //       };
-    //     }
-    //     return input;
-    //   });
-    // });
     dispatch({
       type: inputTypes.HANDLE_INPUT_CHANGE,
       id,
@@ -144,32 +128,12 @@ export default function Sidebar() {
   };
 
   const addLanguage = () => {
-    // return setLanguages([
-    //   ...languages,
-    //   {
-    //     id: uuid(),
-    //     value: "",
-    //     lvlLanguage: "Native or Bilingual Proficiency",
-    //     bool: false,
-    //   },
-    // ]);
     dispatch({
       type: inputTypes.ADD_LANGUAGE,
     });
   };
 
   const handleLanguageChange = (id, value) => {
-    // return setLanguages(() => {
-    //   return languages.map((language) => {
-    //     if (language.id === id) {
-    //       return {
-    //         ...language,
-    //         value,
-    //       };
-    //     }
-    //     return language;
-    //   });
-    // });
     dispatch({
       type: inputTypes.HANDLE_LANGUAGE_CHANGE,
       id,
@@ -178,17 +142,6 @@ export default function Sidebar() {
   };
 
   const handleBool = (id) => {
-    // return setLanguages((prev) => {
-    //   return prev.map((language) => {
-    //     if (language.id === id) {
-    //       return {
-    //         ...language,
-    //         bool: true,
-    //       };
-    //     }
-    //     return language;
-    //   });
-    // });
     dispatch({
       type: inputTypes.HANDLE_BOOL,
       id,
@@ -196,26 +149,12 @@ export default function Sidebar() {
   };
 
   const handleLvl = (lvlLanguage, id) => {
-    // return setLanguages((prev) => {
-    //   return prev.map((language) => {
-    //     if (language.id === id) {
-    //       return {
-    //         ...language,
-    //         lvlLanguage,
-    //         bool: false,
-    //       };
-    //     }
-    //     return language;
-    //   });
-    // });
     dispatch({
       type: inputTypes.HANDLE_LVL,
       lvlLanguage,
       id,
     });
   };
-
-  // console.log({ languages, skills });
 
   return (
     <div className="cv-sidebar">
@@ -263,9 +202,6 @@ export default function Sidebar() {
                 borderRadius: "6px",
                 color: "#fff",
               }}
-              // onkeypress={
-              //   (this.style.width = (this.value.length + 1) * 8 + "px")
-              // }
             />
           );
         })}
