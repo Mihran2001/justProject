@@ -7,6 +7,7 @@ import PrivateRoute from "./PrivateRout";
 import { useAuthProviderState } from "./providers/AuthProvider";
 import CvCreator from "./pages/CvCreator/index";
 import GuestRoute from "./GuestRoute";
+import AnotherTemplate from "./pages/AnotherTemplate/index";
 
 function NotFoundPage() {
   return <h3>Not correct url</h3>;
@@ -25,6 +26,10 @@ export default function Router() {
         <Route path="/" exact>
           <Home />
         </Route>
+
+        <PrivateRoute path="/profile/cv/another-template">
+          <AnotherTemplate />
+        </PrivateRoute>
         <PrivateRoute path="/profile/cv">
           <CvCreator />
         </PrivateRoute>

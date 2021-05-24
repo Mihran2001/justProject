@@ -14,6 +14,10 @@ export default function Header() {
     localStorage.removeItem(key);
     history.push("/");
   };
+
+  const anotherTemplate = () => {
+    history.push("/profile/cv/another-template");
+  };
   return (
     <div>
       <div className="go-to-profile">
@@ -24,6 +28,11 @@ export default function Header() {
       <div className="logOut">
         <Button variant="light" onClick={() => logOut("access_token")}>
           LogOut
+        </Button>
+      </div>
+      <div className="another-template">
+        <Button variant="light" onClick={anotherTemplate}>
+          Another Template
         </Button>
       </div>
     </div>

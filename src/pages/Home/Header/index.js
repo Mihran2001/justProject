@@ -11,17 +11,19 @@ import { Redirect } from "react-router";
 export default function Header() {
   const history = useHistory();
 
-  const routeChange = () => {
+  const changeRoute = () => {
     let path = "/auth/login";
     history.push(path);
   };
   return (
     <div>
       <div className="fixed-build-resume">
-        <Button variant="secondary">Build a resume</Button>
+        <Button variant="secondary" onClick={changeRoute}>
+          Build a resume
+        </Button>
       </div>
       <div className="login">
-        <Button variant="light" onClick={routeChange}>
+        <Button variant="light" onClick={changeRoute}>
           Login
         </Button>
       </div>
@@ -34,7 +36,9 @@ export default function Header() {
               <h3>Your resume is available at a click</h3>
               <p>Easy Tool to get started with</p>
               <div class="bulid-resume">
-                <Button variant="warning">BUILD A RESUME</Button>
+                <Button variant="warning" onClick={changeRoute}>
+                  BUILD A RESUME
+                </Button>
               </div>
             </Carousel.Caption>
           </Carousel.Item>
@@ -45,7 +49,9 @@ export default function Header() {
               <h3>Your resume is available at a click</h3>
               <p>Easy Tool to get started with</p>
               <div class="bulid-resume">
-                <Button variant="warning">BUILD A RESUME</Button>
+                <Button variant="warning" onClick={changeRoute}>
+                  BUILD A RESUME
+                </Button>
               </div>
             </Carousel.Caption>
           </Carousel.Item>
@@ -55,7 +61,9 @@ export default function Header() {
               <h3>Your resume is available at a click</h3>
               <p>Easy Tool to get started with</p>
               <div class="bulid-resume">
-                <Button variant="warning">BUILD A RESUME</Button>
+                <Button variant="warning" onClick={changeRoute}>
+                  BUILD A RESUME
+                </Button>
               </div>
             </Carousel.Caption>
           </Carousel.Item>

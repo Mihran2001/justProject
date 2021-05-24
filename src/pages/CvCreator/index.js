@@ -11,7 +11,7 @@ export default function CvCreator() {
         <Header />
         <Sidebar />
         <Main />
-      </div>{" "}
+      </div>
     </div>
   );
 }

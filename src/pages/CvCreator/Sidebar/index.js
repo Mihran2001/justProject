@@ -108,6 +108,7 @@ export default function Sidebar() {
     skills: [],
     languages: [],
   });
+  const [srcContent, setSrcContent] = useState("");
 
   console.log(state);
 
@@ -156,6 +157,25 @@ export default function Sidebar() {
     });
   };
 
+  const onChange = (e) => {
+    const files = e.target.files;
+    const file = files[0];
+    getBase64(file);
+  };
+
+  const onLoad = (fileString) => {
+    // console.log(typeof fileString);
+    setSrcContent(fileString);
+  };
+
+  const getBase64 = (file) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      onLoad(reader.result);
+    };
+  };
+
   return (
     <div className="cv-sidebar">
       <input
@@ -163,10 +183,21 @@ export default function Sidebar() {
         id="myfile"
         name="myfile"
         style={{ display: "none" }}
+        onChange={onChange}
       />
       <label htmlFor="myfile">
-        <Avatar icon={<UserOutlined />} />
+        {srcContent === "" ? (
+          <Avatar icon={<UserOutlined />} />
+        ) : (
+          <img
+            src={srcContent}
+            height="100px"
+            width="100px"
+            style={{ borderRadius: "50%" }}
+          />
+        )}
       </label>
+
       <div className="mail-phone-number">
         <MailOutlined className="mail-icon" />
         <Input
