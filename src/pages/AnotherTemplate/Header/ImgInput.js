@@ -23,7 +23,16 @@ export default function InputImg() {
   };
 
   return (
-    <div className="input-img">
+    <div
+      className="input-img-second-template"
+      style={{
+        display: "flex",
+        height: "150px",
+        width: "150px",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <input
         type="file"
         id="myfile"
@@ -31,7 +40,16 @@ export default function InputImg() {
         style={{ display: "none" }}
         onChange={onChange}
       />
-      <label htmlFor="myfile">
+      <label
+        htmlFor="myfile"
+        style={{
+          height: "100%",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         {srcContent === "" ? (
           <Avatar icon={<UserOutlined />} />
         ) : (
@@ -40,6 +58,7 @@ export default function InputImg() {
             height="100px"
             width="100px"
             style={{ borderRadius: "50%" }}
+            style={{ height: "100%", width: "100%" }}
           />
         )}
       </label>

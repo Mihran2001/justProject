@@ -1,15 +1,14 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import "./style.less";
-import { Avatar, Input } from "antd";
+import { Input } from "antd";
 import {
-  UserOutlined,
   MailOutlined,
   MobileOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-import Item from "antd/lib/list/Item";
 import { Space, Typography, Divider } from "antd";
 import uuid from "react-uuid";
+import InputImg from "./InputImg";
 
 const inputTypes = {
   SET_SKILL: "SET_SKILL",
@@ -108,7 +107,6 @@ export default function Sidebar() {
     skills: [],
     languages: [],
   });
-  const [srcContent, setSrcContent] = useState("");
 
   console.log(state);
 
@@ -157,46 +155,9 @@ export default function Sidebar() {
     });
   };
 
-  const onChange = (e) => {
-    const files = e.target.files;
-    const file = files[0];
-    getBase64(file);
-  };
-
-  const onLoad = (fileString) => {
-    // console.log(typeof fileString);
-    setSrcContent(fileString);
-  };
-
-  const getBase64 = (file) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      onLoad(reader.result);
-    };
-  };
-
   return (
     <div className="cv-sidebar">
-      <input
-        type="file"
-        id="myfile"
-        name="myfile"
-        style={{ display: "none" }}
-        onChange={onChange}
-      />
-      <label htmlFor="myfile">
-        {srcContent === "" ? (
-          <Avatar icon={<UserOutlined />} />
-        ) : (
-          <img
-            src={srcContent}
-            height="100px"
-            width="100px"
-            style={{ borderRadius: "50%" }}
-          />
-        )}
-      </label>
+      <InputImg />
 
       <div className="mail-phone-number">
         <MailOutlined className="mail-icon" />
