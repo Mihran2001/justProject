@@ -19,7 +19,13 @@ export const AreasOfExpertiseAdd = styled.div`
   border-bottom: 2px solid;
 `;
 
-export const ExpertiseInputs = styled.div`
+export const ExpertiseInputsMainDiv = styled.div`
   display: flex;
   width: 100%;
 `;
+
+export const AreasOfExpertiseDiv = styled.div`
+  display: flex;
+`;
+
+export const AreasOfExpertiseInputsDiv = styled.div``;

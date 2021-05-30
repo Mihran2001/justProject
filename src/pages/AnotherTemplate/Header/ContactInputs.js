@@ -8,7 +8,7 @@ const InputDiv = styled.div`
   margin-left: 50px;
 `;
 
-export default function ContactInputs({ icon, placeholder }) {
+export default function ContactInputs({ icon, placeholder, onChange }) {
   return (
     <InputDiv>
       {icon}
@@ -23,6 +23,7 @@ export default function ContactInputs({ icon, placeholder }) {
           color: "white",
         }}
         placeholder={placeholder}
+        onChange={onChange}
       />
     </InputDiv>
   );
