@@ -23,7 +23,7 @@ import {
 } from "./styled";
 
 import { Context } from "../Provider";
-import { InputNames } from "../Provider";
+import { InputNames } from "../inputNames";
 
 export default function Header() {
   const { state, dispatch } = useContext(Context);

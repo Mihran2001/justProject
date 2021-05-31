@@ -9,19 +9,16 @@ import {
 import { PlusCircleOutlined } from "@ant-design/icons";
 import uuid from "react-uuid";
 import { Context } from "../Provider";
-import { InputNames } from "../Provider";
+import { InputNames } from "../inputNames";
 import { Input } from "antd";
+import { useProviderDispatchHook } from "../Provider";
+import { useProviderStateHook } from "../Provider";
 
 export default function Body() {
-  const { state, dispatch } = useContext(Context);
-
-  const setInputValue = (id) => {
-    for (let i = 0; i < state.expertiseInputs.length; ++i) {
-      if (state.expertiseInputs[i].id === id) {
-        return state.expertiseInputs.value;
-      }
-    }
-  };
+  const { dispatch } = useContext(Context);
+  const { addAreasOfExpertise, changeAreasOfExpertise } =
+    useProviderDispatchHook();
+  const state = useProviderStateHook();
 
   console.log(state.expertiseInputs);
   return (
@@ -35,13 +32,14 @@ export default function Body() {
               margin: "10px",
               color: "rgb(103, 119, 135)",
             }}
-            onClick={(e) =>
-              dispatch({
-                type: InputNames.EXPERTISEINPUTS,
-                value: "",
-                id: uuid(),
-              })
-            }
+            // onClick={(e) =>
+            //   dispatch({
+            //     type: InputNames.EXPERTISEINPUTS,
+            //     value: "",
+            //     id: uuid(),
+            //   })
+            // }
+            onClick={addAreasOfExpertise}
           />
         </AreasOfExpertiseAdd>
         <ExpertiseInputsMainDiv>
@@ -49,15 +47,18 @@ export default function Body() {
             return (
               <AreasOfExpertiseInputsDiv>
                 <Input
-                  key={uuid()}
+                  key={item.id}
+                  // onChange={(e) =>
+                  //   dispatch({
+                  //     type: InputNames.ADDEXPERTISEINPUT,
+                  //     id: item.id,
+                  //     value: e.target.value,
+                  //   })
+                  // }
                   onChange={(e) =>
-                    dispatch({
-                      type: InputNames.ADDEXPERTISEINPUT,
-                      id: item.id,
-                      value: e.target.value,
-                    })
+                    changeAreasOfExpertise(item.id, e.target.value)
                   }
-                  // value={}
+                  value={item.value}
                 />
               </AreasOfExpertiseInputsDiv>
             );
