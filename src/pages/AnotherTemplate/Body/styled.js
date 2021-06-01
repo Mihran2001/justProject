@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { Input } from "antd";
 
 export const CvBody = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   //   background-color: red;
 `;
@@ -24,8 +24,22 @@ export const ExpertiseInputsMainDiv = styled.div`
   width: 100%;
 `;
 
-export const AreasOfExpertiseDiv = styled.div`
-  display: flex;
+// export const AreasOfExpertiseDiv = styled.div`
+//   display: flex;
+// `;
+
+export const Certificates = styled.div`
+  width: 90%;
+  margin: 30px;
 `;
 
-export const AreasOfExpertiseInputsDiv = styled.div``;
+export const CertificatesAdd = styled.div`
+  display: flex;
+  width: 330px;
+  border: none;
+  border-bottom: 2px solid;
+`;
+
+export const CertificatesInputsDiv = styled.div`
+  width: 100%;
+`;

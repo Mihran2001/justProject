@@ -1,26 +1,32 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import {
   CvBody,
   AreasOfExpertise,
   AreasOfExpertiseAdd,
   ExpertiseInputsMainDiv,
-  AreasOfExpertiseInputsDiv,
+  Certificates,
+  CertificatesAdd,
+  CertificatesInputsDiv,
 } from "./styled";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import uuid from "react-uuid";
-import { Context } from "../Provider";
-import { InputNames } from "../inputNames";
-import { Input } from "antd";
 import { useProviderDispatchHook } from "../Provider";
 import { useProviderStateHook } from "../Provider";
+import AutoGrowInput from "./AutoGrowInput";
+import { Input } from "antd";
 
 export default function Body() {
-  const { dispatch } = useContext(Context);
-  const { addAreasOfExpertise, changeAreasOfExpertise } =
-    useProviderDispatchHook();
+  const [value, setValue] = useState("");
+  const {
+    addAreasOfExpertise,
+    changeAreasOfExpertise,
+    addCertificate,
+    changeCertificate,
+  } = useProviderDispatchHook();
   const state = useProviderStateHook();
 
   console.log(state.expertiseInputs);
+  console.log(state.certificateInputes);
+
   return (
     <CvBody>
       <AreasOfExpertise>
@@ -32,39 +38,52 @@ export default function Body() {
               margin: "10px",
               color: "rgb(103, 119, 135)",
             }}
-            // onClick={(e) =>
-            //   dispatch({
-            //     type: InputNames.EXPERTISEINPUTS,
-            //     value: "",
-            //     id: uuid(),
-            //   })
-            // }
             onClick={addAreasOfExpertise}
           />
         </AreasOfExpertiseAdd>
         <ExpertiseInputsMainDiv>
           {state.expertiseInputs.map((item) => {
             return (
-              <AreasOfExpertiseInputsDiv>
-                <Input
-                  key={item.id}
-                  // onChange={(e) =>
-                  //   dispatch({
-                  //     type: InputNames.ADDEXPERTISEINPUT,
-                  //     id: item.id,
-                  //     value: e.target.value,
-                  //   })
-                  // }
-                  onChange={(e) =>
-                    changeAreasOfExpertise(item.id, e.target.value)
-                  }
-                  value={item.value}
-                />
-              </AreasOfExpertiseInputsDiv>
+              <AutoGrowInput
+                onChange={setValue}
+                item={item}
+                changeAreasOfExpertise={changeAreasOfExpertise}
+              />
             );
           })}
         </ExpertiseInputsMainDiv>
       </AreasOfExpertise>
+      <Certificates>
+        <CertificatesAdd>
+          <h2 style={{ color: "rgb(103, 119, 135)" }}> Certificates </h2>
+          <PlusCircleOutlined
+            style={{
+              fontSize: "25px",
+              margin: "10px",
+              color: "rgb(103, 119, 135)",
+            }}
+            onClick={addCertificate}
+          />
+        </CertificatesAdd>
+        <CertificatesInputsDiv>
+          {state.certificateInputes.map((item) => {
+            return (
+              <Input
+                key={item.id}
+                value={item.value}
+                onChange={(e) => changeCertificate(item.id, e.target.value)}
+                style={{
+                  width: "90%",
+                  marginTop: "10px",
+                  border: "none",
+                  outline: "none",
+                }}
+                placeholder="Certificate Name And Date"
+              />
+            );
+          })}
+        </CertificatesInputsDiv>
+      </Certificates>
     </CvBody>
   );
 }

@@ -7,8 +7,6 @@ import React, {
 import { reducer } from "./reducer";
 import uuid from "react-uuid";
 import { InputNames } from "./inputNames";
-import { AreasOfExpertiseInputsDiv } from "./Body/styled";
-import { Input } from "antd";
 
 export const Context = createContext({});
 
@@ -24,6 +22,7 @@ export default function StateProvider({ children }) {
     twiter: "",
     insta: "",
     expertiseInputs: [],
+    certificateInputes: [],
   });
 
   return (
@@ -57,9 +56,30 @@ export const useProviderDispatchHook = () => {
     [dispatch]
   );
 
+  const addCertificate = useCallback(() => {
+    dispatch({
+      type: InputNames.CERTIFICATEINPUTES,
+      value: "",
+      id: uuid(),
+    });
+  }, [dispatch]);
+
+  const changeCertificate = useCallback(
+    (id, value) => {
+      dispatch({
+        type: InputNames.CHANGECERTIFICATEINPUTEVALUE,
+        id,
+        value,
+      });
+    },
+    [dispatch]
+  );
+
   return {
     addAreasOfExpertise,
     changeAreasOfExpertise,
+    addCertificate,
+    changeCertificate,
   };
 };
 
