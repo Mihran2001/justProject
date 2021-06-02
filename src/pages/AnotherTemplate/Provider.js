@@ -23,6 +23,7 @@ export default function StateProvider({ children }) {
     insta: "",
     expertiseInputs: [],
     certificateInputes: [],
+    educationInputes: [],
   });
 
   return (
@@ -75,11 +76,33 @@ export const useProviderDispatchHook = () => {
     [dispatch]
   );
 
+  const addEducation = () => {
+    dispatch({
+      type: InputNames.ADDEDUCATION,
+      id: uuid(),
+      value: { universityName: "", faculty: "", date: "" },
+    });
+  };
+
+  const changeEducationValue = useCallback(
+    (id, value, keyName) => {
+      dispatch({
+        type: InputNames.CHANGEEDUCATIONVALUE,
+        id,
+        value,
+        keyName,
+      });
+    },
+    [dispatch]
+  );
+
   return {
     addAreasOfExpertise,
     changeAreasOfExpertise,
     addCertificate,
     changeCertificate,
+    addEducation,
+    changeEducationValue,
   };
 };
 

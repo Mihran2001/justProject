@@ -78,5 +78,25 @@ export const reducer = (state, action) => {
       return item;
     });
     return { ...state, certificateInputes: changedCertificateInputs };
+  } else if (action.type === InputNames.ADDEDUCATION) {
+    return {
+      ...state,
+      educationInputes: [...state.educationInputes, action],
+    };
+  } else if (action.type === InputNames.CHANGEEDUCATIONVALUE) {
+    const { keyName } = action;
+    const mapedInput = state.educationInputes.map((item) => {
+      if (item.id === action.id) {
+        return {
+          ...item,
+          value: {
+            ...item.value,
+            [keyName]: action.value,
+          },
+        };
+      }
+      return item;
+    });
+    return { ...state, educationInputes: mapedInput };
   }
 };

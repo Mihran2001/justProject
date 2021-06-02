@@ -8,7 +8,7 @@ export const CvBody = styled.div`
 `;
 
 export const AreasOfExpertise = styled.div`
-  width: 90%;
+  width: 100%;
   margin: 30px;
 `;
 
@@ -21,12 +21,9 @@ export const AreasOfExpertiseAdd = styled.div`
 
 export const ExpertiseInputsMainDiv = styled.div`
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
 `;
-
-// export const AreasOfExpertiseDiv = styled.div`
-//   display: flex;
-// `;
 
 export const Certificates = styled.div`
   width: 90%;
@@ -42,4 +39,36 @@ export const CertificatesAdd = styled.div`
 
 export const CertificatesInputsDiv = styled.div`
   width: 100%;
+`;
+
+export const Education = styled.div`
+  // display: flex;
+  width: 90%;
+  margin: 30px;
+`;
+
+export const EducationAdd = styled.div`
+  display: flex;
+  width: 330px;
+  border: none;
+  border-bottom: 2px solid;
+`;
+
+export const EducationInputsMainDiv = styled.div`
+  width: 100%;
+`;
+
+export const EducationInputDiv = styled.div`
+  margin-top: 10px;
+`;
+
+export const Languages = styled.div`
+  // flex: 1;
+`;
+
+export const LanguagesAdd = styled.div`
+  display: flex;
+  width: 330px;
+  border: none;
+  border-bottom: 2px solid;
 `;
