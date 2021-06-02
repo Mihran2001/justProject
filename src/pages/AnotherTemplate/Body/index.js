@@ -13,6 +13,7 @@ import {
   EducationInputDiv,
   Languages,
   LanguagesAdd,
+  EducationAndLanguages,
 } from "./styled";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { useProviderDispatchHook } from "../Provider";
@@ -93,55 +94,57 @@ export default function Body() {
           })}
         </CertificatesInputsDiv>
       </Certificates>
-      <Education>
-        <EducationAdd>
-          <h2 style={{ color: "rgb(103, 119, 135)" }}> Education </h2>
-          <PlusCircleOutlined
-            style={{
-              fontSize: "25px",
-              margin: "10px",
-              color: "rgb(103, 119, 135)",
-            }}
-            onClick={addEducation}
-          />
-        </EducationAdd>
-        <EducationInputsMainDiv>
-          {state.educationInputes.map((item) => {
-            return (
-              <EducationInputDiv key={item.id}>
-                <Input
-                  value={item.value.universityName}
-                  onChange={(e) =>
-                    changeEducationValue(
-                      item.id,
-                      e.target.value,
-                      "universityName"
-                    )
-                  }
-                  placeholder="University Name"
-                  style={{ border: "none", fontSize: "20px" }}
-                />
-                <Input
-                  value={item.value.faculty}
-                  onChange={(e) =>
-                    changeEducationValue(item.id, e.target.value, "faculty")
-                  }
-                  placeholder="Faculty"
-                  style={{ border: "none" }}
-                />
-                <Input
-                  value={item.value.date}
-                  onChange={(e) =>
-                    changeEducationValue(item.id, e.target.value, "date")
-                  }
-                  placeholder="Date"
-                  style={{ border: "none" }}
-                />
-              </EducationInputDiv>
-            );
-          })}
-        </EducationInputsMainDiv>
-        {/* <Languages>
+      <EducationAndLanguages>
+        <Education>
+          <EducationAdd>
+            <h2 style={{ color: "rgb(103, 119, 135)" }}> Education </h2>
+            <PlusCircleOutlined
+              style={{
+                fontSize: "25px",
+                margin: "10px",
+                color: "rgb(103, 119, 135)",
+              }}
+              onClick={addEducation}
+            />
+          </EducationAdd>
+          <EducationInputsMainDiv>
+            {state.educationInputes.map((item) => {
+              return (
+                <EducationInputDiv key={item.id}>
+                  <Input
+                    value={item.value.universityName}
+                    onChange={(e) =>
+                      changeEducationValue(
+                        item.id,
+                        e.target.value,
+                        "universityName"
+                      )
+                    }
+                    placeholder="University Name"
+                    style={{ border: "none", fontSize: "20px" }}
+                  />
+                  <Input
+                    value={item.value.faculty}
+                    onChange={(e) =>
+                      changeEducationValue(item.id, e.target.value, "faculty")
+                    }
+                    placeholder="Faculty"
+                    style={{ border: "none" }}
+                  />
+                  <Input
+                    value={item.value.date}
+                    onChange={(e) =>
+                      changeEducationValue(item.id, e.target.value, "date")
+                    }
+                    placeholder="Date"
+                    style={{ border: "none" }}
+                  />
+                </EducationInputDiv>
+              );
+            })}
+          </EducationInputsMainDiv>
+        </Education>
+        <Languages>
           <LanguagesAdd>
             <h2 style={{ color: "rgb(103, 119, 135)" }}> Languages </h2>
             <PlusCircleOutlined
@@ -153,8 +156,8 @@ export default function Body() {
               // onClick={addEducation}
             />
           </LanguagesAdd>
-        </Languages> */}
-      </Education>
+        </Languages>
+      </EducationAndLanguages>
     </CvBody>
   );
 }

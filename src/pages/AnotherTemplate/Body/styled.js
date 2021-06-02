@@ -4,7 +4,6 @@ export const CvBody = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  //   background-color: red;
 `;
 
 export const AreasOfExpertise = styled.div`
@@ -41,10 +40,17 @@ export const CertificatesInputsDiv = styled.div`
   width: 100%;
 `;
 
-export const Education = styled.div`
-  // display: flex;
+export const EducationAndLanguages = styled.div`
+  display: flex;
   width: 90%;
   margin: 30px;
+`;
+
+export const Education = styled.div`
+  display: flex;
+  width: 50%;
+  // margin: 30px;
+  flex: 2;
 `;
 
 export const EducationAdd = styled.div`
@@ -63,7 +69,7 @@ export const EducationInputDiv = styled.div`
 `;
 
 export const Languages = styled.div`
-  // flex: 1;
+  flex: 1;
 `;
 
 export const LanguagesAdd = styled.div`
