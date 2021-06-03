@@ -48,6 +48,7 @@ export const EducationAndLanguages = styled.div`
 
 export const Education = styled.div`
   display: flex;
+  flex-direction: column;
   width: 50%;
   // margin: 30px;
   flex: 2;
@@ -77,4 +78,8 @@ export const LanguagesAdd = styled.div`
   width: 330px;
   border: none;
   border-bottom: 2px solid;
+`;
+
+export const LanguageInputsDiv = styled.div`
+  width: 100%;
 `;

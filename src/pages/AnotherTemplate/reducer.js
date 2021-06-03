@@ -98,5 +98,55 @@ export const reducer = (state, action) => {
       return item;
     });
     return { ...state, educationInputes: mapedInput };
+  } else if (action.type === InputNames.ADDLANGUAGE) {
+    return {
+      ...state,
+      languages: [
+        ...state.languages,
+        {
+          id: action.id,
+          value: "",
+          lvlLanguage: "Native or Bilingual Proficiency",
+          bool: false,
+        },
+      ],
+    };
+  } else if (action.type === InputNames.INPUTLANGUAGE) {
+    const mapedLanguages = state.languages.map((item) => {
+      if (item.id === action.id) {
+        return {
+          ...item,
+          value: action.value,
+        };
+      }
+      return item;
+    });
+    return { ...state, languages: mapedLanguages };
+  } else if (action.type === InputNames.HANDLEBOOL) {
+    const mapedLanguages = state.languages.map((item) => {
+      if (item.id === action.id) {
+        return {
+          ...item,
+          bool: action.bool,
+        };
+      }
+      return item;
+    });
+    return { ...state, languages: mapedLanguages };
+  } else if (action.type === InputNames.HANDLELVL) {
+    const mapedLvl = state.languages.map((item) => {
+      if (item.id === action.id) {
+        return {
+          ...item,
+          lvlLanguage: action.lvl,
+          bool: false,
+        };
+      }
+      return item;
+    });
+    return {
+      ...state,
+      languages: mapedLvl,
+    };
   }
 };

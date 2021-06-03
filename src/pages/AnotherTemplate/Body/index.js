@@ -14,12 +14,13 @@ import {
   Languages,
   LanguagesAdd,
   EducationAndLanguages,
+  LanguageInputsDiv,
 } from "./styled";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { useProviderDispatchHook } from "../Provider";
 import { useProviderStateHook } from "../Provider";
 import AutoGrowInput from "./AutoGrowInput";
-import { Input } from "antd";
+import { Space, Typography, Divider, Input } from "antd";
 
 export default function Body() {
   const [value, setValue] = useState("");
@@ -30,12 +31,17 @@ export default function Body() {
     changeCertificate,
     addEducation,
     changeEducationValue,
+    addLanguage,
+    inputLanguage,
+    handleBool,
+    handleLvl,
   } = useProviderDispatchHook();
   const state = useProviderStateHook();
 
   // console.log(state.expertiseInputs);
   // console.log(state.certificateInputes);
-  console.log(state.educationInputes);
+  // console.log(state.educationInputes);
+  console.log(state.languages);
 
   return (
     <CvBody>
@@ -55,6 +61,7 @@ export default function Body() {
           {state.expertiseInputs.map((item) => {
             return (
               <AutoGrowInput
+                key={item.id}
                 onChange={setValue}
                 item={item}
                 changeAreasOfExpertise={changeAreasOfExpertise}
@@ -153,9 +160,86 @@ export default function Body() {
                 margin: "10px",
                 color: "rgb(103, 119, 135)",
               }}
-              // onClick={addEducation}
+              onClick={addLanguage}
             />
           </LanguagesAdd>
+          {state.languages.map((item) => {
+            return (
+              <LanguageInputsDiv key={item.id}>
+                <Input
+                  value={item.value}
+                  onChange={(e) => inputLanguage(item.id, e.target.value)}
+                  placeholder="Input Language"
+                  style={{ border: "none", outline: "none", fontSize: "20px" }}
+                />
+                {item.bool ? (
+                  <Space
+                    split={<Divider type="vertical" />}
+                    style={{
+                      backgroundColor: "slategrey",
+                      marginTop: "10px",
+                      padding: "10px",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <Typography.Link
+                      className="lvl-numbers"
+                      style={{ color: "white" }}
+                      onClick={() =>
+                        handleLvl("Elementary Proficiency", item.id)
+                      }
+                    >
+                      1/5
+                    </Typography.Link>
+                    <Typography.Link
+                      className="lvl-numbers"
+                      style={{ color: "white" }}
+                      onClick={() =>
+                        handleLvl("Limited Working Proficiency", item.id)
+                      }
+                    >
+                      2/5
+                    </Typography.Link>
+                    <Typography.Link
+                      className="lvl-numbers"
+                      style={{ color: "white" }}
+                      onClick={() =>
+                        handleLvl("Professional Working Proficiency", item.id)
+                      }
+                    >
+                      3/5
+                    </Typography.Link>
+                    <Typography.Link
+                      className="lvl-numbers"
+                      style={{ color: "white" }}
+                      onClick={() =>
+                        handleLvl("Full Professional Proficiency", item.id)
+                      }
+                    >
+                      4/5
+                    </Typography.Link>
+                    <Typography.Link
+                      className="lvl-numbers"
+                      style={{ color: "white" }}
+                      onClick={() =>
+                        handleLvl("Native or Bilingual Proficiency", item.id)
+                      }
+                    >
+                      5/5
+                    </Typography.Link>
+                  </Space>
+                ) : (
+                  <p
+                    style={{ fontSize: "13px" }}
+                    className="language-lvl"
+                    onClick={() => handleBool(item.id)}
+                  >
+                    {item.lvlLanguage}
+                  </p>
+                )}
+              </LanguageInputsDiv>
+            );
+          })}
         </Languages>
       </EducationAndLanguages>
     </CvBody>

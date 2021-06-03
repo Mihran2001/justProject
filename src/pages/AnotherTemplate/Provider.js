@@ -24,6 +24,7 @@ export default function StateProvider({ children }) {
     expertiseInputs: [],
     certificateInputes: [],
     educationInputes: [],
+    languages: [],
   });
 
   return (
@@ -96,6 +97,22 @@ export const useProviderDispatchHook = () => {
     [dispatch]
   );
 
+  const addLanguage = () => {
+    dispatch({ type: InputNames.ADDLANGUAGE, id: uuid() });
+  };
+
+  const inputLanguage = (id, value) => {
+    dispatch({ type: InputNames.INPUTLANGUAGE, id, value });
+  };
+
+  const handleBool = (id) => {
+    dispatch({ type: InputNames.HANDLEBOOL, bool: true, id });
+  };
+
+  const handleLvl = (lvl, id) => {
+    dispatch({ type: InputNames.HANDLELVL, id, lvl });
+  };
+
   return {
     addAreasOfExpertise,
     changeAreasOfExpertise,
@@ -103,6 +120,10 @@ export const useProviderDispatchHook = () => {
     changeCertificate,
     addEducation,
     changeEducationValue,
+    addLanguage,
+    inputLanguage,
+    handleBool,
+    handleLvl,
   };
 };
 
